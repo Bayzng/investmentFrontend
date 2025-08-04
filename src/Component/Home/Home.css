@@ -1,0 +1,647 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+:root {
+  --hki-bg: #000;
+  --hki-surface: #111;
+  --hki-border: rgba(255, 255, 255, 0.1);
+  --hki-text-primary: #f0f0f0;
+  --hki-text-secondary: #a0a0a0;
+  --hki-accent-1: #4f46e5;
+  --hki-accent-2: #a855f7;
+  --neon-blue: #08f7fe;
+  --neon-pink: #fe53bb;
+  --neon-green: #00ff9d;
+  --neon-purple: #7122fa;
+  --dark-bg: #0a0a12;
+}
+
+body {
+  background-color: var(--hki-bg);
+  color: var(--hki-text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  line-height: 1.6;
+}
+
+#hki_page_wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#hki_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.hki_logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.hki_nav a {
+  color: var(--hki-text-secondary);
+  text-decoration: none;
+  margin-left: 2rem;
+  transition: color 0.3s;
+}
+
+.hki_nav a:hover {
+  color: var(--hki-text-primary);
+}
+
+#hki_mobile_nav_toggle {
+  display: none;
+  background-color: var(--hki-accent-1);
+  color: #0d1117;
+  padding: 5px 17px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+  color: var(--hki-text-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+#hki_hero {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#hki_neural_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hki_hero_content {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+}
+
+#hki_hero_title {
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 900;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  min-height: 1.2em;
+}
+
+.hki_hero_subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: var(--hki-text-secondary);
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+.hki_section {
+  padding: 6rem 0;
+}
+
+.hki_bento_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.hki_feature_card {
+  background: var(--hki-surface);
+  border: 1px solid var(--hki-border);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.hki_feature_card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.hki_feature_card p {
+  margin: 0;
+  color: var(--hki-text-secondary);
+}
+
+.hki_large_card {
+  grid-column: 1 / -1;
+}
+
+.hki_animate_on_scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.hki_animate_on_scroll.hki_is_visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hki_section_title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hki_demo_terminal {
+  background: var(--hki-surface);
+  border: 1px solid var(--hki-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#hki_demo_output {
+  min-height: 100px;
+  margin-bottom: 1rem;
+  color: var(--hki-text-secondary);
+}
+
+.hki_ai_response::after {
+  content: '_';
+  animation: hki_blink 0.7s infinite;
+}
+
+@keyframes hki_blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#hki_demo_form {
+  display: flex;
+  justify-content: center;
+}
+
+#hki_demo_form button {
+  background-image: linear-gradient(to right, var(--hki-accent-1), var(--hki-accent-2));
+  border: none;
+  color: var(--hki-text-primary);
+  width: 150px;
+  height: 50px;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#hki_cta {
+  text-align: center;
+}
+
+#hki_cta h2 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+#hki_cta p {
+  color: var(--hki-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.hki_cta_button {
+  background-image: linear-gradient(to right, var(--hki-accent-1), var(--hki-accent-2));
+  color: var(--hki-text-primary);
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.hki_cta_button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.4);
+}
+
+#hki_footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--hki-border);
+}
+
+.hki_credit_line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--hki-text-secondary);
+}
+
+.hki_credit_line span {
+  font-weight: 500;
+}
+
+.hki_footer_links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hki_footer_links a {
+  color: var(--hki-text-secondary);
+  display: inline-flex;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.hki_footer_links a:hover {
+  color: var(--hki-accent-1);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .hki_nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--hki-surface);
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .hki_nav.hki_mobile_open {
+    display: flex;
+  }
+
+  .hki_nav a {
+    margin: 0;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  #hki_mobile_nav_toggle {
+    display: block;
+  }
+
+  .hki_bento_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hki_large_card {
+    grid-column: auto;
+  }
+}
+
+
+.RoadMap  {
+    padding: 20px;
+    margin: 20px;
+    margin-top: 6rem;
+    font-size: 1.5rem;
+    border: none;
+    
+}
+
+.RoadMap a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.tradeee {
+    margin-bottom: 40rem;
+}
+
+
+
+
+/* Modal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background: black;
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+  }
+  
+  .home-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+  }
+  
+
+body {
+  margin: 0;
+  background: var(--dark-bg);
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.dashboard {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(8, 247, 254, 0.3);
+  padding-bottom: 1rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(8, 247, 254, 0.3);
+  letter-spacing: 2px;
+}
+
+.time {
+  color: var(--neon-blue);
+  font-size: 1.2rem;
+}
+
+.crypto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.crypto-card {
+  background: rgba(10, 10, 20, 0.7);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid rgba(8, 247, 254, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.crypto-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+  z-index: -1;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.crypto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(8, 247, 254, 0.2);
+}
+
+.crypto-card:hover::before {
+  opacity: 0.3;
+}
+
+.crypto-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.crypto-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+  object-fit: contain;
+}
+
+.crypto-name {
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--neon-blue);
+}
+
+.crypto-symbol {
+  color: var(--neon-pink);
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.crypto-price {
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
+  letter-spacing: 1px;
+}
+
+.price-change {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.price-up {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--neon-green);
+}
+
+.price-down {
+  background: rgba(254, 83, 187, 0.1);
+  color: var(--neon-pink);
+}
+
+.crypto-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stat {
+  font-size: 0.9rem;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  font-weight: bold;
+}
+
+.glow {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.glow-1 {
+  background: var(--neon-blue);
+  top: -50px;
+  left: -50px;
+  animation: float 8s infinite ease-in-out;
+}
+
+.glow-2 {
+  background: var(--neon-pink);
+  bottom: -50px;
+  right: -50px;
+  animation: float 10s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, 20px); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+
+/* Medium Screens (Tablet) */
+@media (max-width: 768px) {
+  .hki_hero_subtitle {
+    font-size: 1rem;
+  }
+
+  .hki_hero_content {
+    padding: 0.5rem;
+  }
+
+  #hki_hero {
+    height: auto;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hki_section {
+    padding: 3rem 0;
+  }
+
+  #hki_demo_form {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #hki_demo_form button {
+    width: 100%;
+    font-size: 1.2rem;
+    height: 45px;
+  }
+
+  .crypto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .crypto-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard {
+    padding: 1rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .hki_cta_button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .RoadMap {
+    margin: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .hki_section_title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Small Screens (Mobile - extra small) */
+@media (max-width: 480px) {
+  #hki_hero_title {
+    font-size: 2rem;
+  }
+
+  .hki_cta_button {
+    width: 100%;
+  }
+
+  .crypto-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .crypto-name {
+    font-size: 1rem;
+  }
+
+  .crypto-price {
+    font-size: 1.5rem;
+  }
+
+  .stat {
+    font-size: 0.85rem;
+  }
+
+  .home-close-btn {
+    font-size: 1.2rem;
+    top: 8px;
+    right: 10px;
+  }
+}

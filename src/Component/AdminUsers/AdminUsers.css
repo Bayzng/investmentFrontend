@@ -1,0 +1,135 @@
+.admin-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff, #f0f3f5);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Header */
+  .admin-container h2 {
+    font-size: 32px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .admin-container p {
+    text-align: center;
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+  }
+  
+  /* No Users */
+  .no-users {
+    text-align: center;
+    font-style: italic;
+    font-size: 16px;
+    color: #bbb;
+  }
+  
+  /* User List */
+  .user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  /* User Card */
+  .user-card {
+    background-color: black;
+    border-left: 5px solid #3498db;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+  
+  .user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  .user-card strong {
+    font-size: 18px;
+    color: red;
+  }
+  
+  .user-card b {
+    color: #2ecc71;
+  }
+  
+  /* Balance Action */
+  .balance-action {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .balance-action input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: border 0.3s ease;
+  }
+  
+  .balance-action input:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .balance-action button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .balance-action button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Tags */
+  .role-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  
+  .role-tag.admin {
+    background-color: #e74c3c;
+  }
+  
+  .role-tag.user {
+    background-color: #27ae60;
+  }
+  
+  .role-tag.owner {
+    background-color: #8e44ad;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .user-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  

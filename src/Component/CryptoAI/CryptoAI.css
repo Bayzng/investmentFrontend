@@ -1,0 +1,174 @@
+
+  
+  a {
+    color: #58a6ff;
+    text-decoration: none;
+  }
+  
+  .cryptofi-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+  }
+  
+  /* Header */
+  .cryptofi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: #161b22;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .cryptofi-header h1 {
+    font-size: 2rem;
+    color: #58a6ff;
+  }
+  
+  .cryptofi-header nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+  
+  /* Hero */
+  .cryptofi-hero {
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .cryptofi-hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .cryptofi-hero p {
+    font-size: 1.2rem;
+    color: #9ca3af;
+    margin-bottom: 30px;
+  }
+  
+  .cryptofi-hero button {
+    background-color: #58a6ff;
+    border: none;
+    padding: 14px 36px;
+    font-size: 1rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .cryptofi-hero button:hover {
+    background-color: #1f6feb;
+  }
+  
+  /* Sections */
+  .cryptofi-section {
+    padding: 60px 20px;
+  }
+  
+  .cryptofi-section h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #58a6ff;
+  }
+  
+  .cryptofi-section ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .cryptofi-section ul li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+  
+  /* Features */
+  .feature-highlight {
+    background-color: #161b22;
+    border-radius: 8px;
+  }
+  
+  .feature-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .feature-card {
+    background-color: #21262d;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+  }
+  
+  .feature-card h4 {
+    margin-bottom: 10px;
+    color: #c9d1d9;
+  }
+  
+  /* AI Signals */
+  .signals {
+    background-color: #0d1117;
+  }
+  
+  .signal-example {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+  }
+  
+  .signal-box {
+    padding: 20px;
+    border-radius: 8px;
+    width: 240px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .buy {
+    background-color: #033b1d;
+    color: #00ff95;
+    border: 1px solid #00ff95;
+  }
+  
+  .sell {
+    background-color: #3b0303;
+    color: #ff6a6a;
+    border: 1px solid #ff6a6a;
+  }
+  
+  .signals button {
+    display: block;
+    margin: auto;
+    padding: 12px 28px;
+    background-color: #58a6ff;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .signals button:hover {
+    background-color: #1f6feb;
+  }
+  
+  /* Footer */
+  .cryptofi-footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    background-color: #161b22;
+    border-top: 1px solid #30363d;
+  }
+  
