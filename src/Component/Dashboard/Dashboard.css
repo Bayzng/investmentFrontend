@@ -899,7 +899,8 @@ select:focus {
   margin: 10px;
   background-color: #00c6ff;
   border: none;
-  padding: 3px 20px;
+  font-size: 1rem;
+  padding: 6px 20px;
   color: black;
   border-radius: 10px;
   cursor: pointer;
@@ -918,6 +919,12 @@ select:focus {
 @media (max-width: 768px) {
   .dashboard-root {
     padding: 1rem;
+  }
+
+  .modal-overlays {
+    margin-top: 0; 
+    align-items: flex-start; 
+    padding-top: 1rem; 
   }
 
   .dashboard-header,
