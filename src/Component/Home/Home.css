@@ -544,6 +544,7 @@ h1 {
   .hki_hero_subtitle {
     font-size: 1rem;
   }
+  
 
   .hki_hero_content {
     padding: 0.5rem;
@@ -582,11 +583,11 @@ h1 {
     padding: 1rem;
   }
 
-  header {
+  /* header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-  }
+  } */
 
   h1 {
     font-size: 2rem;

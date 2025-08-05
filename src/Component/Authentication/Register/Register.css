@@ -13,7 +13,7 @@
     background-color: white;
     padding: 40px 30px;
     border-radius: 16px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); */
     max-width: 400px;
     width: 100%;
     text-align: center;
@@ -39,7 +39,7 @@
   .register-form input:focus {
     border-color: #667eea;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    /* box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2); */
   }
   
   .register-form button {
@@ -86,5 +86,9 @@
     color: green;
     margin-bottom: 10px;
     font-weight: bold;
+  }
+
+  .modal-close {
+    margin-left: 20rem;
   }
   

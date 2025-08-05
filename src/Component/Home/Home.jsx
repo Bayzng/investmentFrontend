@@ -279,26 +279,25 @@ const Home = () => {
     <div id="hki_page_wrapper">
       <header id="hki_header">
         <div className="hki_logo">CryptoFI</div>
-        <nav className="hki_nav">
-          <Link to="/blockchainExplorer">
-            <a href="#">Contract</a>
-          </Link>
-          <Link to="/cryptoAI">
-            {" "}
-            <a href="#">AI</a>
-          </Link>
-          <a
-            href="#"
-            className="hki_cta_button"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowModal(true);
-            }}
-          >
-            Get Started
-          </a>
-
-        </nav>
+          <nav className="hki_nav">
+            <Link to="/blockchainExplorer">
+              <a href="#">Contract</a>
+            </Link>
+            <Link to="/cryptoAI">
+              {" "}
+              <a href="#">AI</a>
+            </Link>
+            <a
+              href="#"
+              className="hki_cta_button"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true);
+              }}
+            >
+              Get Started
+            </a>
+          </nav>
           {showModal && (
             <div className="modal-overlay">
               <div className="modal-content">
@@ -312,11 +311,10 @@ const Home = () => {
               </div>
             </div>
           )}
-        
-        <button id="hki_mobile_nav_toggle" onClick={() => setShowModal(true)}>
-  Get Started
-</button>
 
+        <button id="hki_mobile_nav_toggle" onClick={() => setShowModal(true)}>
+          Get Started
+        </button>
       </header>
 
       <main id="hki_main_content">

@@ -89,7 +89,7 @@ const Register = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <button className="modal-close" onClick={() => setShowLogin(false)}>
-              &times;
+              {/* &times; */}X
             </button>
             <Login />
           </div>

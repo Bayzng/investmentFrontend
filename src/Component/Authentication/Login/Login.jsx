@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+    const [successMsg, setSuccessMsg] = useState("");
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -17,6 +20,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setSuccessMsg("");
 
     try {
       // const res = await axios.post("http://localhost:5000/api/auth/login", form);
@@ -26,7 +31,11 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login successful");
+      setSuccessMsg(res.data.message || "Login successful.");
+
+      setLoading(false);
+
+      // alert("Login successful");
 
       // Redirect based on role
       if (res.data.user.role === "admin") {
@@ -36,6 +45,7 @@ const Login = () => {
       }
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
+      setLoading(false);
     }
   };
 
@@ -43,6 +53,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card">
         <h2 className="login-title">Welcome Back</h2>
+        {successMsg && <p className="success-message">{successMsg}</p>}
         <form onSubmit={handleSubmit} className="login-form">
           <input
             name="email"
@@ -58,7 +69,10 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-          <button type="submit">Login</button>
+          <button type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Login"}
+            </button>
+          {/* <button type="submit">Login</button> */}
         </form>
       </div>
     </div>

@@ -273,9 +273,12 @@ body {
   }
 
   .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   }
+
+  
 
   nav {
     margin-top: 1rem;
@@ -897,7 +900,7 @@ select:focus {
 .tradingDashboardBtn {
   padding: 5px;
   margin: 10px;
-  background-color: #00c6ff;
+  background-color: green;
   border: none;
   font-size: 1rem;
   padding: 6px 20px;
@@ -929,10 +932,13 @@ select:focus {
 
   .dashboard-header,
   .dashboard-top-first,
-  .user-info-first {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+  .user-info-first > *:nth-child(1),
+  .user-info-first > *:nth-child(2) {
+    flex: 1 1 48%; /* first two side by side */
+  }
+
+  .user-info-first > *:nth-child(3) {
+    flex: 1 1 100%; /* third item goes down */
   }
 
   .dashboard-grid,
@@ -1059,6 +1065,10 @@ select:focus {
   .card-change {
     font-size: 0.9rem;
   }
+}
+
+.trading-link {
+  color: white;
 }
 
 
