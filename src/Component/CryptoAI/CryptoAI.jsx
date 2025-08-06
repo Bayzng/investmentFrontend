@@ -60,7 +60,7 @@ const CryptoAI = () => {
           <div className="signal-box buy">🟢 Buy Signal: BTC @ $28,430</div>
           <div className="signal-box sell">🔴 Sell Signal: ETH @ $1,942</div>
         </div>
-        <button>Join Signal Group 📬</button>
+        <button>Signal 📬</button>
       </section>
 
       {/* Footer */}

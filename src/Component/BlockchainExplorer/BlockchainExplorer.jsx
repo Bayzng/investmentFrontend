@@ -82,17 +82,18 @@ const BlockchainExplorer = () => {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((tx, index) => (
-              <tr key={index}>
-                <td>{tx.hash}</td>
-                <td>{tx.from}</td>
-                <td>{tx.to}</td>
-                <td>{tx.amount}</td>
-                <td>{tx.gasFee}</td>
-                <td>{tx.time}</td>
-              </tr>
-            ))}
-          </tbody>
+  {transactions.map((tx, index) => (
+    <tr key={index}>
+      <td data-label="Tx Hash">{tx.hash}</td>
+      <td data-label="From">{tx.from}</td>
+      <td data-label="To">{tx.to}</td>
+      <td data-label="Amount">{tx.amount}</td>
+      <td data-label="Gas Fee">{tx.gasFee}</td>
+      <td data-label="Time">{tx.time}</td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       </section>
 

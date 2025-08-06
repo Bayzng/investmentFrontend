@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Home.css";
 import Hero from "../Hero/Hero";
-import coin from "../../assets/coin.png";
 import Register from "../Authentication/Register/Register";
 import TradingDashboard from "../TradingDashboard/TradingDashboard";
 import { Link } from "react-router-dom";
@@ -346,7 +345,7 @@ const Home = () => {
         <section id="hki_features" className="hki_section">
           <div className="hki_bento_grid">
             <div className="hki_feature_card hki_animate_on_scroll">
-              <h3>Bank-Grade Security 🌎</h3>
+              <h3>CryptoFi Grade Security 🌎</h3>
               <p>
                 Our foundational model understands context, our assets are
                 protected with advanced encryption and multi-factor
@@ -363,7 +362,7 @@ const Home = () => {
             <div className="hki_feature_card hki_animate_on_scroll hki_large_card">
               <h3>Earn with Us 💲</h3>
               <p>
-                By integrating our AI's you will be able to Stake, lend, and
+                By integrating our AI's you will be able to Stake and
                 earn rewards on your crypto holdings, as we have the most
                 powerful and advance Artificial Intelligence features.
               </p>
@@ -386,7 +385,7 @@ const Home = () => {
             </div>
             {/* <form id="hki_demo_form" onSubmit={handleSubmit}> */}
             <form id="hki_demo_form">
-              <button type="submit">Generate→</button>
+              <button>CryptoFi 🚀</button>
             </form>
           </div>
         </section>
@@ -411,12 +410,12 @@ const Home = () => {
           </header>
 
           <div className="crypto-grid">
-            {cryptoData.map((crypto, i) => {
+            {cryptoData.map((crypto) => {
               const isUp = crypto.price_change_percentage_24h >= 0;
               return (
                 <div className="crypto-card" key={crypto.id}>
                   <div className="crypto-header">
-                    <img src={coin} alt={crypto.name} className="crypto-logo" />
+                    <img src={crypto.image} alt={crypto.name} className="crypto-logo" />
                     <h3 className="crypto-name">
                       {crypto.name}{" "}
                       <span className="crypto-symbol">
@@ -478,19 +477,11 @@ const Home = () => {
           <span>📣 Call to Action</span>
           <div className="hki_footer_links">
             <a
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
             >
               Trust
             </a>{" "}
             AND
             <a
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Instagram"
             >
               Reliable
             </a>

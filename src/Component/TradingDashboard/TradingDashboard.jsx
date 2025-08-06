@@ -119,7 +119,7 @@ const TradingDashboard = () => {
       <div className="market-news">
         <h3>Market News</h3>
         <div className="news-list">
-          <NewsItem time="14:30" impact="high" text="Federal Reserve maintains interest rates, signals potential cuts in 2024" />
+          <NewsItem time="14:30" impact="high" text="Federal Reserve maintains interest rates, signals potential cuts in 2025" />
           <NewsItem time="12:15" impact="medium" text="Bitcoin surpasses $42,000 as institutional demand grows" />
           <NewsItem time="10:45" impact="high" text="European markets react to latest ECB policy decision" />
         </div>

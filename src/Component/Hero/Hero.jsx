@@ -1,34 +1,31 @@
 import React from "react";
+import celo from "../../assets/celo.png"
+import arbitrum from "../../assets/arbitrum-logo.png"
+import avalanche from "../../assets/avalanche.png"
+import ethereum from "../../assets/ethereum.png"
+import polkadot from "../../assets/Polkadot-Logo.png"
 import "./Hero.css"
 // import { directive } from "../../../node_modules/@babel/types/lib/index-legacy.d";
 
 const Hero = () => {
   return (
     <div>
-      <div>
-        <div class="img">
-          {/* <img
-            src="https://cdn.prod.website-files.com/682d1c6b3c16bb956eafd6aa/682d1c6b3c16bb956eafdbb9_3d-tb-education.png"
-            alt=""
-          /> */}
-        </div>
-      </div>
       <div class="brands">
-        <img src="https://pngimg.com/d/google_PNG19644.png" alt="google" />
+        <img src={arbitrum} alt="ethereum" />
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Slack_Technologies_Logo.svg/2560px-Slack_Technologies_Logo.svg.png"
-          alt="slack"
+          src={ethereum}
+          alt="arbitrum"
         />
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Agworld_Logo.svg/2560px-Agworld_Logo.svg.png"
-          alt="Agworld"
+          src={celo}
+          alt="celo"
         />
         <img
-          src="https://download.logo.wine/logo/Rio_Tinto_(corporation)/Rio_Tinto_(corporation)-Logo.wine.png"
+          src={avalanche}
           alt="riotinto"
         />
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Heroku_logo.svg/2560px-Heroku_logo.svg.png"
+          src={polkadot}
           alt="heroku"
         />
       </div>
