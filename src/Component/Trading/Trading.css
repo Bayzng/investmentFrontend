@@ -1,154 +1,140 @@
 .trading-asset {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: space-between;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
-
 .tradingModal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 15, 26, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    backdrop-filter: blur(4px);
-  }
-  
-  .tradingModal-content {
-    background: linear-gradient(145deg, #1a1c2b, #25283d);
-    color: #f4f4f4;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 520px;
-    /* box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); */
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
-    font-family: "Segoe UI", sans-serif;
-  }
-  
-  .tradingModal-content h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-  }
-  
-  .tradingModal-content p {
-    font-size: 1rem;
-    margin: 10px 0;
-    line-height: 1.5;
-  }
-  
-  .request-btn {
-    background: linear-gradient(to right, #06b6d4, #3b82f6);
-    color: white;
-    padding: 14px 24px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 10px;
-    margin-top: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  
-  .request-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(to right, #3b82f6, #06b6d4);
-    box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
-  }
-  
-  .tradingModal-content textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 10px;
-    background: #111827;
-    color: #f4f4f4;
-    border: 1px solid #334155;
-    font-size: 0.95rem;
-    resize: none;
-  }
-  
-  .tradingModal-content button {
-    background-color: #4ade80;
-    color: #1f2937;
-    font-weight: bold;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    margin-top: 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .tradingModal-content button:hover {
-    background-color: #22c55e;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 15, 26, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
 
-  .tradingModal-content p {
-    margin: 15px ;
-    font-size: 1rem;
-    /* line-height: 1.6; */
-    padding: 12px;
-    border-radius: 10px;
-    /* display: flex; */
-    align-items: center;
-    gap: 10px;
-    background: #161b22;
-    border-left: 4px solid #58a6ff;
-    transition: all 0.3s;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+.tradingModal-content {
+  background: linear-gradient(145deg, #1a1c2b, #25283d);
+  color: #f4f4f4;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 520px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.tradingModal-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.tradingModal-content p {
+  font-size: 1rem;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+.request-btn {
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  color: white;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  margin-top: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.request-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #3b82f6, #06b6d4);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+.tradingModal-content textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background: #111827;
+  color: #f4f4f4;
+  border: 1px solid #334155;
+  font-size: 0.95rem;
+  resize: none;
+}
+
+.tradingModal-content button {
+  background-color: #4ade80;
+  color: #1f2937;
+  font-weight: bold;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tradingModal-content button:hover {
+  background-color: #22c55e;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
   }
-  
-  /* Emoji-friendly spacing */
-  .tradingModal-content p::before {
-    /* content: "✨"; */
-    font-size: 1.2rem;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  /* Specific paragraph customizations */
-  .tradingModal-content p:nth-of-type(1)::before {
-    /* content: "🚀"; */
-    color: #34d399;
-  }
-  
-  .tradingModal-content p:nth-of-type(2)::before {
-    /* content: "📈"; */
-    color: #facc15;
-  }
-  
-  .tradingModal-content p:nth-of-type(3)::before {
-    /* content: "💰"; */
-    color: #10b981;
-  }
-  
-  .tradingModal-content p:nth-of-type(4)::before {
-    /* content: "✨"; */
-    color: #c084fc;
-  }
-  
-  /* On hover, highlight effect */
-  .tradingModal-content p:hover {
-    background: #1f2937;
-    transform: scale(1.02);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  }
-  
+}
+
+.tradingModal-content p {
+  margin: 15px;
+  font-size: 1rem;
+  padding: 12px;
+  border-radius: 10px;
+  align-items: center;
+  gap: 10px;
+  background: #161b22;
+  border-left: 4px solid #58a6ff;
+  transition: all 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tradingModal-content p::before {
+  font-size: 1.2rem;
+}
+
+.tradingModal-content p:nth-of-type(1)::before {
+  color: #34d399;
+}
+
+.tradingModal-content p:nth-of-type(2)::before {
+  color: #facc15;
+}
+
+.tradingModal-content p:nth-of-type(3)::before {
+  color: #10b981;
+}
+
+.tradingModal-content p:nth-of-type(4)::before {
+  color: #c084fc;
+}
+
+.tradingModal-content p:hover {
+  background: #1f2937;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}

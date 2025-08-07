@@ -8,7 +8,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  /* Header */
   .admin-container h2 {
     font-size: 32px;
     color: #2c3e50;
@@ -23,7 +22,6 @@
     margin-bottom: 30px;
   }
   
-  /* No Users */
   .no-users {
     text-align: center;
     font-style: italic;
@@ -31,7 +29,6 @@
     color: #bbb;
   }
   
-  /* User List */
   .user-list {
     list-style: none;
     padding: 0;
@@ -41,7 +38,6 @@
     gap: 20px;
   }
   
-  /* User Card */
   .user-card {
     background-color: black;
     border-left: 5px solid #3498db;
@@ -66,7 +62,6 @@
     color: #2ecc71;
   }
   
-  /* Balance Action */
   .balance-action {
     margin-top: 15px;
     display: flex;
@@ -102,7 +97,6 @@
     background-color: #2980b9;
   }
   
-  /* Tags */
   .role-tag {
     display: inline-block;
     margin-top: 10px;
@@ -126,7 +120,6 @@
     background-color: #8e44ad;
   }
   
-  /* Responsive */
   @media (max-width: 768px) {
     .user-list {
       grid-template-columns: 1fr;

@@ -27,7 +27,6 @@ const Login = () => {
       // const res = await axios.post("http://localhost:5000/api/auth/login", form);
       const res = await axios.post("https://investmentbackend-6m5g.onrender.com/api/auth/login", form);
 
-      // Save token and user info to localStorage
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
@@ -39,7 +38,7 @@ const Login = () => {
 
       // Redirect based on role
       if (res.data.user.role === "admin") {
-        navigate("/admin/users"); // <-- FIXED
+        navigate("/admin/users"); 
       } else {
         navigate("/dashboard");
       }
@@ -72,7 +71,6 @@ const Login = () => {
           <button type="submit" disabled={loading}>
               {loading ? "Loading..." : "Login"}
             </button>
-          {/* <button type="submit">Login</button> */}
         </form>
       </div>
     </div>

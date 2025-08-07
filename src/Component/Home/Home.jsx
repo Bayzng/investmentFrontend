@@ -383,7 +383,6 @@ const Home = () => {
                 <span className="blinker">_</span>
               </p>
             </div>
-            {/* <form id="hki_demo_form" onSubmit={handleSubmit}> */}
             <form id="hki_demo_form">
               <button>CryptoFi 🚀</button>
             </form>

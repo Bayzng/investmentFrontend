@@ -6,11 +6,8 @@ import {  faEuroSign, faYenSign, faShoppingCart, faFileInvoiceDollar, faStopCirc
 const TradingDashboard = () => {
   return (
     <div className="trading-dashboard">
-      {/* Market Overview */}
       <div className="market-overview">
-        {/* BTC Card */}
         <MarketCard
-        //   icon={}
           pair="BTC/USD"
           price="$42,850.20"
           change="+2.34%"
@@ -20,7 +17,6 @@ const TradingDashboard = () => {
           rising
         />
 
-        {/* EUR Card */}
         <MarketCard
           icon={faEuroSign}
           pair="EUR/USD"
@@ -31,7 +27,6 @@ const TradingDashboard = () => {
           pathLine="M0 25 L20 28 L40 32 L60 29 L80 33 L100 35 L120 31 L140 34 L160 30 L180 33 L200 31"
         />
 
-        {/* JPY Card */}
         <MarketCard
           icon={faYenSign}
           pair="USD/JPY"
@@ -44,7 +39,6 @@ const TradingDashboard = () => {
         />
       </div>
 
-      {/* Main Chart */}
       <div className="main-chart">
         <div className="chart-header">
           <div className="chart-title">
@@ -85,7 +79,6 @@ const TradingDashboard = () => {
         </div>
       </div>
 
-      {/* Trading Panel */}
       <div className="trading-panel">
         <div className="order-types">
           <button className="order-btn active"><FontAwesomeIcon icon={faShoppingCart} /> Market</button>
@@ -115,7 +108,6 @@ const TradingDashboard = () => {
         </div>
       </div>
 
-      {/* Market News */}
       <div className="market-news">
         <h3>Market News</h3>
         <div className="news-list">
@@ -128,7 +120,6 @@ const TradingDashboard = () => {
   );
 };
 
-// MarketCard Component
 const MarketCard = ({ icon, pair, price, change, changeType, pathArea, pathLine, rising }) => {
   return (
     <div className={`market-card ${rising ? 'rising' : 'falling'}`}>
@@ -150,7 +141,6 @@ const MarketCard = ({ icon, pair, price, change, changeType, pathArea, pathLine,
   );
 };
 
-// NewsItem Component
 const NewsItem = ({ time, impact, text }) => (
   <div className="news-item">
     <div className="news-header">

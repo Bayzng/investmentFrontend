@@ -34,7 +34,7 @@ const Register = () => {
       // Delay before showing login modal
       setTimeout(() => {
         setShowLogin(true);
-      }, 2500); // 2.5 seconds delay
+      }, 2500); 
 
     } catch (err) {
       alert(err.response?.data?.message || "Registration failed.");
@@ -88,9 +88,9 @@ const Register = () => {
       {showLogin && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button className="modal-close" onClick={() => setShowLogin(false)}>
-              {/* &times; */}X
-            </button>
+            <p className="modal-close" onClick={() => setShowLogin(false)}>
+              X
+            </p>
             <Login />
           </div>
         </div>

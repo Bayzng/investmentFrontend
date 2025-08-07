@@ -14,6 +14,7 @@ import { Line, Doughnut } from "react-chartjs-2";
 import "./Dashboard.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import arbitrum from "../../assets/arb.png";
 
 const wallets = [
   { name: "MetaMask", icon: "🦊" },
@@ -43,6 +44,7 @@ const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [balance, setBalance] = useState(0);
   const [showBalanceNotice, setShowBalanceNotice] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false); 
 
   const [selectedWallet, setSelectedWallet] = useState(null);
 
@@ -53,7 +55,7 @@ const Dashboard = () => {
   const [selectedNetwork, setSelectedNetwork] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const walletAddress = "0xABCD1234EF567890ArbitrumOneWallet";
+  const walletAddress = "0x6eca9a23a949d0050278703bee9aff5aaf53b2ab";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(walletAddress);
@@ -82,11 +84,14 @@ const Dashboard = () => {
 
       try {
         // const res = await axios.get("http://localhost:5000/api/auth/me", {
-        const res = await axios.get("https://investmentbackend-6m5g.onrender.com/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.get(
+          "https://investmentbackend-6m5g.onrender.com/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setUsername(res.data.name);
         setBalance(res.data.balance);
@@ -200,30 +205,16 @@ const Dashboard = () => {
     }
   }, [balanceChartData, timePeriod]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const data = Array.from({ length: 20 }, (_, i) => ({
-  //       date: new Date(2024, 6, i + 1),
-  //       value: getRandomValue(3000, 200),
-  //     }));
-  //     drawMiniChart(data);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   const drawBalanceChart = (data) => {
     const containerEl = document.getElementById("balanceChart");
     if (!containerEl) return;
 
-    // clean previous
     d3.select(containerEl).select("svg").remove();
 
-    // dynamic sizing based on container
     const containerWidth = containerEl.clientWidth;
     const margin = { top: 20, right: 30, bottom: 30, left: 50 };
-    // maintain aspect ratio but cap min height
     const innerWidth = containerWidth - margin.left - margin.right;
-    const innerHeight = Math.max(150, innerWidth * 0.35); // e.g., ~3:1 ratio
+    const innerHeight = Math.max(150, innerWidth * 0.35);
 
     const svg = d3
       .select(containerEl)
@@ -284,7 +275,6 @@ const Dashboard = () => {
       drawBalanceChart(balanceChartData[timePeriod]);
     }
 
-    // observe resize and debounce redraw
     let timeoutId = null;
     const resizeObserver = new ResizeObserver(() => {
       clearTimeout(timeoutId);
@@ -292,7 +282,7 @@ const Dashboard = () => {
         if (balanceChartData[timePeriod]) {
           drawBalanceChart(balanceChartData[timePeriod]);
         }
-      }, 100); // small debounce
+      }, 100); 
     });
 
     resizeObserver.observe(container);
@@ -350,7 +340,7 @@ const Dashboard = () => {
         <div className="user-info-first">
           <div className="user-info">
             <h3 className="username">{username}.eth</h3>
-            <p className="wallet-address">0x3f7d...E92F</p>
+            <p className="wallet-address">0x6ec..a9a2</p>
           </div>
 
           <div className="logout">
@@ -368,10 +358,10 @@ const Dashboard = () => {
                 <button
                   onClick={() => {
                     if (!selectedWallet) {
-                      setShowConnectNotice(true); // show warning modal
-                      setShowModal(true); // open wallet connection modal
+                      setShowConnectNotice(true);
+                      setShowModal(true);
                     } else {
-                      setIsModalOpen(true); // open deposit modal if wallet connected
+                      setIsModalOpen(true);
                     }
                   }}
                 >
@@ -413,17 +403,30 @@ const Dashboard = () => {
                       </div>
                     ) : (
                       <>
-                        <div className="dropdown">
-                          <label>Select Network:</label>
-                          <select
-                            onChange={(e) => setSelectedNetwork(e.target.value)}
-                            value={selectedNetwork}
+                        <div className="custom-dropdown">
+                          {/* <label className="custom-dropdown-label">Select Network:</label> */}
+                          <div
+                            className="selected"
+                            onClick={() => setShowDropdown(!showDropdown)}
                           >
-                            <option value="">-- Choose Network --</option>
-                            <option value="Arbitrum One">
-                              🌉 Arbitrum One
-                            </option>
-                          </select>
+                            {selectedNetwork === "Arbitrum One" && (
+                              <img src={arbitrum} alt="Arbitrum" />
+                            )}
+                            {selectedNetwork || "Choose Network"}
+                          </div>
+                          {showDropdown && (
+                            <ul>
+                              <li
+                                onClick={() => {
+                                  setSelectedNetwork("Arbitrum One");
+                                  setShowDropdown(false);
+                                }}
+                              >
+                                <img src={arbitrum} alt="Arbitrum" /> Arbitrum
+                                One
+                              </li>
+                            </ul>
+                          )}
                         </div>
 
                         {selectedNetwork === "Arbitrum One" && (
@@ -557,9 +560,9 @@ const Dashboard = () => {
                   key={index}
                   className="wallet-option"
                   onClick={() => {
-                    setSelectedWallet(wallet.name); // Save wallet name
-                    setShowModal(false); // Close connect wallet modal
-                    setIsModalOpen(true); // Open deposit modal
+                    setSelectedWallet(wallet.name);
+                    setShowModal(false);
+                    setIsModalOpen(true);
                   }}
                 >
                   <div className="wallet-icon">{wallet.icon}</div>

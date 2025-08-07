@@ -16,14 +16,17 @@ const Trading = () => {
   const handleSendMail = async () => {
     try {
       // const res = await axios.post("http://localhost:5000/api/send-mail", {
-      const res = await axios.post("https://investmentbackend-6m5g.onrender.com/api/send-mail", {
-        subject: "Request for Trading Tutor or Partner",
-        to: "ayofe70@gmail.com",
-        message: `Hello CryptoFi Team,\n\nI would like to request a trading ${
-          balance <= 0 ? "tutor" : "partner"
-        } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.\n\nThank you,\n${username}`,
-      });
-  
+      const res = await axios.post(
+        "https://investmentbackend-6m5g.onrender.com/api/send-mail",
+        {
+          subject: "Request for Trading Tutor or Partner",
+          to: "ayofe70@gmail.com",
+          message: `Hello CryptoFi Team,\n\nI would like to request a trading ${
+            balance <= 0 ? "tutor" : "partner"
+          } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.\n\nThank you,\n${username}`,
+        }
+      );
+
       if (res.status === 200) {
         alert("✅ Email sent to support@cryptofi.com!");
         setShowRequestModal(false);
@@ -35,12 +38,11 @@ const Trading = () => {
       alert("⚠️ Could not send email. Check your connection.");
     }
   };
-  
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
-    }, 8000); // Show modal after 30 seconds
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -68,16 +70,22 @@ const Trading = () => {
 
       try {
         // const res = await axios.get("http://localhost:5000/api/auth/me", {
-        const res = await axios.get("https://investmentbackend-6m5g.onrender.com/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.get(
+          "https://investmentbackend-6m5g.onrender.com/api/auth/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setUsername(res.data.name);
         setBalance(res.data.balance);
       } catch (error) {
-        console.error("Error fetching user data:", error.response?.data || error.message);
+        console.error(
+          "Error fetching user data:",
+          error.response?.data || error.message
+        );
       }
     };
 
@@ -114,7 +122,9 @@ Subject: Request for Trading Tutor or Partner
 
 Hello CryptoFi Team,
 
-I would like to request a trading ${balance <= 0 ? "tutor" : "partner"} to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.
+I would like to request a trading ${
+    balance <= 0 ? "tutor" : "partner"
+  } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.
 
 Thank you,
 ${username}
@@ -144,7 +154,7 @@ ${username}
 
         <div className="user-info">
           <h3 className="username">{username}.eth</h3>
-          <p className="wallet-address">0x3f7d...E92F</p>
+          <p className="wallet-address">0x6ec..a9a2</p>
         </div>
       </div>
 
@@ -160,7 +170,8 @@ ${username}
             <h3>Last Traded Price</h3>
             <p className="big-number">${price.toLocaleString()}</p>
             <p className={isPositive ? "positive-change" : "negative-change"}>
-              {isPositive ? "+" : "-"}${change.toLocaleString()} ({percentChange}%)
+              {isPositive ? "+" : "-"}${change.toLocaleString()} (
+              {percentChange}%)
             </p>
           </div>
         </div>
@@ -169,46 +180,64 @@ ${username}
       <div id="tv_chart_container" />
 
       {showModal && (
-  <div className="tradingModal-overlay" onClick={() => setShowModal(false)}>
-    <div className="tradingModal-content" onClick={(e) => e.stopPropagation()}>
-      <h2>👋 Welcome to CryptoFi Trading</h2>
-      <p>🚀 Ready to level up your crypto journey?</p>
-      <p>
-        📈 CryptoFi offers <strong>higher returns</strong> through smart trading.
-      </p>
-      <p>
-        💰 If your wallet isn’t funded yet, go back to the dashboard, copy your
-        wallet address, and deposit some crypto to begin!
-      </p>
-      <p>
-        ✨ You will need to Request for a <strong>trading tutor</strong> or find a{" "}
-        <strong>trading partner</strong> to start with.
-      </p>
-      <button className="request-btn" onClick={() => setShowRequestModal(true)}>
-        📩 Request Tutor/Partner
-      </button>
-    </div>
-  </div>
-)}
+        <div
+          className="tradingModal-overlay"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="tradingModal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>👋 Welcome to CryptoFi Trading</h2>
+            <p>🚀 Ready to level up your crypto journey?</p>
+            <p>
+              📈 CryptoFi offers <strong>higher returns</strong> through smart
+              trading.
+            </p>
+            <p>
+              💰 If your wallet isn’t funded yet, go back to the dashboard, copy
+              your wallet address, and deposit some crypto to begin!
+            </p>
+            <p>
+              ✨ You will need to Request for a <strong>trading tutor</strong>{" "}
+              or find a <strong>trading partner</strong> to start with.
+            </p>
+            <button
+              className="request-btn"
+              onClick={() => setShowRequestModal(true)}
+            >
+              📩 Request Tutor/Partner
+            </button>
+          </div>
+        </div>
+      )}
 
-{showRequestModal && (
-  <div className="tradingModal-overlay" onClick={() => setShowRequestModal(false)}>
-    <div className="tradingModal-content" onClick={(e) => e.stopPropagation()}>
-      <h3>📧 Your Email Draft</h3>
-      <textarea readOnly defaultValue={mailDraft} />
-      <p>
-        ✉️ Copy and send to{" "}
-        <strong style={{ color: "#60a5fa" }}>support@cryptofi.com</strong> or click send below.
-      </p>
-      <button onClick={handleSendMail}>📤 Send Email</button>
-      <button onClick={() => setShowRequestModal(false)} style={{ marginLeft: "10px" }}>
-        Close
-      </button>
-    </div>
-  </div>
-)}
-
-
+      {showRequestModal && (
+        <div
+          className="tradingModal-overlay"
+          onClick={() => setShowRequestModal(false)}
+        >
+          <div
+            className="tradingModal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3>📧 Your Email Draft</h3>
+            <textarea readOnly defaultValue={mailDraft} />
+            <p>
+              ✉️ Copy and send to{" "}
+              <strong style={{ color: "#60a5fa" }}>support@cryptofi.com</strong>{" "}
+              or click send below.
+            </p>
+            <button onClick={handleSendMail}>📤 Send Email</button>
+            <button
+              onClick={() => setShowRequestModal(false)}
+              style={{ marginLeft: "10px" }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

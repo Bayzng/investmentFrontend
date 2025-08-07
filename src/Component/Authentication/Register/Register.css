@@ -1,10 +1,7 @@
-
-  
-  .register-container {
+.register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* min-height: 100vh; */
     background: linear-gradient(to right, #667eea, #764ba2);
     padding: 20px;
   }
@@ -13,7 +10,6 @@
     background-color: white;
     padding: 40px 30px;
     border-radius: 16px;
-    /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); */
     max-width: 400px;
     width: 100%;
     text-align: center;
@@ -39,7 +35,6 @@
   .register-form input:focus {
     border-color: #667eea;
     outline: none;
-    /* box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2); */
   }
   
   .register-form button {
@@ -89,6 +84,16 @@
   }
 
   .modal-close {
-    margin-left: 20rem;
+    margin-left: 27rem;
+    background-color: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .modal-close {
+      margin-left: 20rem;
+      background-color: none;
+      cursor: pointer;
+    }
   }
   

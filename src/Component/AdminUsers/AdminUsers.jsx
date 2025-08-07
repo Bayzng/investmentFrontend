@@ -49,7 +49,7 @@ const AdminUsers = () => {
       );
 
       alert("Balance updated successfully");
-      fetchUsers(); // Refresh data
+      fetchUsers(); 
     } catch (err) {
       console.error("Error adding balance:", err);
       alert("Failed to update balance");

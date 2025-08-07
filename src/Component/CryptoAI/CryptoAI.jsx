@@ -5,7 +5,6 @@ import "./CryptoAI.css";
 const CryptoAI = () => {
   return (
     <div className="cryptofi-container">
-      {/* Header */}
       <header className="cryptofi-header">
         <h1>🤖 CryptoFi AI</h1>
         <nav>
@@ -15,14 +14,12 @@ const CryptoAI = () => {
         </nav>
       </header>
 
-      {/* Hero Section */}
       <section className="cryptofi-hero">
         <h2>Smarter Crypto Trading Starts Here 💡</h2>
         <p>Let AI work for you. Make faster, smarter, emotion-free trading decisions — and earn while you sleep 😴</p>
         <Link to="/"><button>Get Started 🚀</button></Link>
       </section>
 
-      {/* Benefits Section */}
       <section id="benefits" className="cryptofi-section">
         <h3>🔥 Why Choose CryptoFi AI?</h3>
         <ul>
@@ -33,7 +30,6 @@ const CryptoAI = () => {
         </ul>
       </section>
 
-      {/* Features Section */}
       <section id="features" className="cryptofi-section feature-highlight">
         <h3>📈 Trade & Earn — Effortlessly</h3>
         <div className="feature-grid">
@@ -52,7 +48,6 @@ const CryptoAI = () => {
         </div>
       </section>
 
-      {/* AI Signals Section */}
       <section id="signals" className="cryptofi-section signals">
         <h3>📡 AI Trading Signals — Your Crypto GPS 🧭</h3>
         <p>Receive accurate buy/sell alerts 📲 before the market moves — tested and optimized with live data feeds.</p>
@@ -63,7 +58,6 @@ const CryptoAI = () => {
         <button>Signal 📬</button>
       </section>
 
-      {/* Footer */}
       <footer className="cryptofi-footer">
         <p>🚀 Powered by CryptoFi AI — Smarter Trading, Bigger Gains © {new Date().getFullYear()}</p>
       </footer>

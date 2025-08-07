@@ -1,5 +1,3 @@
-/* Base styles remain unchanged */
-
 .brands {
   display: flex;
   flex-direction: row;
@@ -124,7 +122,6 @@
   object-position: center center;
 }
 
-/* Responsive Styles for Small Screens */
 @media (max-width: 768px) {
   .brands {
     flex-direction: column;

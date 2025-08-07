@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const CryptoFiRoadmap = () => {
   return (
     <div className="cryptoFi-landing">
-      {/* Hero Section */}
       <section className="cryptoFi-hero">
         <div className="cryptoFi-hero-content">
           <h1>🚀 Welcome to CryptoFi</h1>
@@ -17,7 +16,6 @@ const CryptoFiRoadmap = () => {
         </div>
       </section>
 
-      {/* Roadmap */}
       <section className="cryptoFi-roadmap">
         <h2 className="cryptoFi-section-title">📍 How It Works</h2>
         <div className="cryptoFi-roadmap-grid">
@@ -59,7 +57,6 @@ const CryptoFiRoadmap = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="cryptoFi-footer">
         <p>© {new Date().getFullYear()} CryptoFi. All rights reserved.</p>
       </footer>

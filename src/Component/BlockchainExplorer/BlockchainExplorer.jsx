@@ -2,7 +2,6 @@ import React from "react";
 import "./BlockchainExplorer.css";
 import { Link } from "react-router-dom";
 
-
 const BlockchainExplorer = () => {
   const transactions = [
     {
@@ -33,25 +32,28 @@ const BlockchainExplorer = () => {
 
   return (
     <div className="container">
-      {/* Header */}
       <header className="header">
         <div className="logo">🔗 CryptoFIScan</div>
         <nav>
           <ul>
-            <li><a>Explorer</a></li>
+            <li>
+              <a>Explorer</a>
+            </li>
           </ul>
         </nav>
       </header>
 
-      {/* Hero */}
       <section className="hero">
         <h1>Explore Blockchain Activity in Real-Time</h1>
-        <p>Track blocks, transactions, gas fees, and more. Fast. Secure. Reliable.</p>
-        <Link to="/"><button>Get Started</button></Link>
-        
+        <p>
+          Track blocks, transactions, gas fees, and more. Fast. Secure.
+          Reliable.
+        </p>
+        <Link to="/">
+          <button>Get Started</button>
+        </Link>
       </section>
 
-      {/* Stats */}
       <section className="stats">
         <div className="stat-card">
           <h2>12,345</h2>
@@ -67,7 +69,6 @@ const BlockchainExplorer = () => {
         </div>
       </section>
 
-      {/* Transactions */}
       <section className="transactions">
         <h2>Recent Transactions</h2>
         <table className="transaction-table">
@@ -82,24 +83,24 @@ const BlockchainExplorer = () => {
             </tr>
           </thead>
           <tbody>
-  {transactions.map((tx, index) => (
-    <tr key={index}>
-      <td data-label="Tx Hash">{tx.hash}</td>
-      <td data-label="From">{tx.from}</td>
-      <td data-label="To">{tx.to}</td>
-      <td data-label="Amount">{tx.amount}</td>
-      <td data-label="Gas Fee">{tx.gasFee}</td>
-      <td data-label="Time">{tx.time}</td>
-    </tr>
-  ))}
-</tbody>
-
+            {transactions.map((tx, index) => (
+              <tr key={index}>
+                <td data-label="Tx Hash">{tx.hash}</td>
+                <td data-label="From">{tx.from}</td>
+                <td data-label="To">{tx.to}</td>
+                <td data-label="Amount">{tx.amount}</td>
+                <td data-label="Gas Fee">{tx.gasFee}</td>
+                <td data-label="Time">{tx.time}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </section>
 
-      {/* Footer */}
       <footer>
-        <p>&copy; {new Date().getFullYear()} CryptoFIScan. All rights reserved 🚀</p>
+        <p>
+          &copy; {new Date().getFullYear()} CryptoFIScan. All rights reserved 🚀
+        </p>
       </footer>
     </div>
   );

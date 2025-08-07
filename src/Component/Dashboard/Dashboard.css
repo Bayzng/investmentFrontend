@@ -274,11 +274,9 @@ body {
 
   .dashboard-header {
     display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
-
-  
 
   nav {
     margin-top: 1rem;
@@ -550,7 +548,7 @@ select:focus {
 .wallet-option {
   display: flex;
   align-items: center;
-  gap: 0.4rem; 
+  gap: 0.4rem;
   padding: 0.5rem 0.75rem;
   background: #1e1e1e;
   border-radius: 8px;
@@ -563,7 +561,7 @@ select:focus {
 }
 
 .wallet-icon {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -671,51 +669,48 @@ select:focus {
 }
 
 .positive-change {
-  color: #22c55e; /* green */
+  color: #22c55e; 
 }
 
 .negative-change {
-  color: #ef4444; /* red */
+  color: #ef4444;
 }
 
-
 .logout button {
-    background: white;
-    color: red;
-    border: none;
-    border-radius: 20px;
-    /* margin-left: 62rem; */
-    padding: 0.5rem 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .logout button:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: pulse 1s infinite;
-  }
+  background: white;
+  color: red;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
 
-  .trading a {
-    text-decoration: red;
-    color: green;
-  }
+.logout button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: pulse 1s infinite;
+}
 
-  .big-number span {
-    font-size: 17px;
-    color: red;
-  }
+.trading a {
+  text-decoration: red;
+  color: green;
+}
 
-  .dashboard-top-first {
-    display: flex;
-    justify-content: space-between;
-  }
+.big-number span {
+  font-size: 17px;
+  color: red;
+}
 
+.dashboard-top-first {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .dashboard-top-first button {
-    background: orange;
+.dashboard-top-first button {
+  background: orange;
   color: var(--text-color);
   border: none;
   border-radius: 20px;
@@ -723,15 +718,14 @@ select:focus {
   font-weight: 600;
   transition: all 0.3s ease;
   cursor: pointer;
-  }
+}
 
-  .dashboard-top-first button:hover {
-    opacity: 0.9;
+.dashboard-top-first button:hover {
+  opacity: 0.9;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   animation: pulse 1s infinite;
-  }
-
+}
 
 .dashboard-top-first {
   display: flex;
@@ -766,7 +760,6 @@ select:focus {
   height: 100%;
   margin-top: -14rem;
   width: 100%;
-  /* background: rgba(15, 15, 15, 0.7); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -775,8 +768,6 @@ select:focus {
 }
 
 .modal-content {
-  /* background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15); */
   border-radius: 20px;
   padding: 30px;
   color: #fff;
@@ -805,8 +796,8 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 15px;
+  border: 1px solid #00c6ff;
   transition: 0.3s ease;
-  border: 1px solid transparent;
 }
 
 .coin-item:hover {
@@ -915,30 +906,26 @@ select:focus {
   -o-border-radius: 20px;
 }
 
-
-
-
-/* Responsive Fix for Tablets */
 @media (max-width: 768px) {
   .dashboard-root {
     padding: 1rem;
   }
 
   .modal-overlays {
-    margin-top: 0; 
-    align-items: flex-start; 
-    padding-top: 1rem; 
+    margin-top: 0;
+    align-items: flex-start;
+    padding-top: 1rem;
   }
 
   .dashboard-header,
   .dashboard-top-first,
   .user-info-first > *:nth-child(1),
   .user-info-first > *:nth-child(2) {
-    flex: 1 1 48%; /* first two side by side */
+    flex: 1 1 48%;
   }
 
   .user-info-first > *:nth-child(3) {
-    flex: 1 1 100%; /* third item goes down */
+    flex: 1 1 100%; 
   }
 
   .dashboard-grid,
@@ -989,7 +976,6 @@ select:focus {
   }
 }
 
-/* Responsive Fix for Mobile Phones */
 @media (max-width: 480px) {
   .dashboard-root {
     padding: 0.5rem;
@@ -1071,5 +1057,56 @@ select:focus {
   color: white;
 }
 
+.custom-dropdown {
+  position: relative;
+  width: 220px;
+}
+.custom-dropdown .selected {
+  padding: 8px;
+  cursor: pointer;
+  background: white;
+  display: flex;
+  color: black;
+  width: 27rem;
+  align-items: center;
+  gap: 8px;
+}
+.custom-dropdown ul {
+  position: absolute;
+  list-style: none;
+  background: white;
+  color: black;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  z-index: 10;
+}
+.custom-dropdown li {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.custom-dropdown li:hover {
+  background: #f0f0f0;
+}
+.custom-dropdown img {
+  width: 40px;
+  height: 36px;
+}
+
+@media (max-width: 768px) {
+  .custom-dropdown .selected {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    width: 19rem;
+    align-items: center;
+    gap: 8px;
+  }
+}
 
 /* { name: "MetaMask", icon: <img src="/icons/metamask.svg" alt="MetaMask" /> } */
