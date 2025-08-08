@@ -31,6 +31,19 @@ body {
   margin-bottom: 2rem;
 }
 
+/* user eghqwduhjq bws xhqshx  s x */
+
+.user-info-first {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly */
+  align-items: center; /* Align vertically */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 1rem; /* Space between items */
+  width: 100%; /* Ensure it spans full width */
+  box-sizing: border-box;
+}
+
+
 .dashboard-nav {
   list-style: none;
   display: flex;
@@ -278,6 +291,7 @@ body {
     gap: 1rem;
   }
 
+
   nav {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -431,11 +445,10 @@ select:focus {
   object-fit: cover;
 }
 
-.user-info-first {
+/* .user-info-first {
   display: flex;
-  /* gap: 63rem; */
   justify-content: space-between;
-}
+} */
 
 .user-info {
   display: flex;
@@ -680,7 +693,7 @@ select:focus {
 .logout button {
   background: white;
   color: red;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
@@ -919,17 +932,6 @@ select:focus {
     padding-top: 1rem;
   }
 
-  .dashboard-header,
-  .dashboard-top-first,
-  .user-info-first > *:nth-child(1),
-  .user-info-first > *:nth-child(2) {
-    flex: 1 1 48%;
-  }
-
-  .user-info-first > *:nth-child(3) {
-    flex: 1 1 100%; 
-  }
-
   .dashboard-grid,
   .dashboard-cards {
     grid-template-columns: 1fr;
@@ -951,7 +953,7 @@ select:focus {
     padding-bottom: 0.5rem;
   }
 
-  .logout button,
+  .button,
   .dashboard-top-first button,
   .glass-btn,
   .connect-wallet-btn,
@@ -1122,4 +1124,9 @@ select:focus {
 }
 
 
-/* { name: "MetaMask", icon: <img src="/icons/metamask.svg" alt="MetaMask" /> } */
+.wallet-option img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+

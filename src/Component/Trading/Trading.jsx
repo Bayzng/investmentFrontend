@@ -20,7 +20,7 @@ const Trading = () => {
         "https://investmentbackend-6m5g.onrender.com/api/send-mail",
         {
           subject: "Request for Trading Tutor or Partner",
-          to: "ayofe70@gmail.com",
+          to: "crypto.cryptofi@gmail.com",
           message: `Hello CryptoFi Team,\n\nI would like to request a trading ${
             balance <= 0 ? "tutor" : "partner"
           } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.\n\nThank you,\n${username}`,
@@ -28,7 +28,7 @@ const Trading = () => {
       );
 
       if (res.status === 200) {
-        alert("✅ Email sent to support@cryptofi.com!");
+        alert("✅ Email sent to crypto.cryptofi@gmail.com!");
         setShowRequestModal(false);
       } else {
         alert("❌ Failed to send email. Try again.");
@@ -117,18 +117,18 @@ const Trading = () => {
   }, []);
 
   const mailDraft = `
-To: support@cryptofi.com
-Subject: Request for Trading Tutor or Partner
+      To: crypto.cryptofi@gmail.com
+      Subject: Request for Trading Tutor or Partner
 
-Hello CryptoFi Team,
+      Hello CryptoFi Team,
 
-I would like to request a trading ${
-    balance <= 0 ? "tutor" : "partner"
-  } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.
+      I would like to request a trading ${
+        balance <= 0 ? "tutor" : "partner"
+      } to assist me in maximizing my trading experience on the platform. Please provide me with guidance on how to proceed.
 
-Thank you,
-${username}
-  `.trim();
+      Thank you,
+      ${username}
+        `.trim();
 
   return (
     <div>
@@ -225,7 +225,9 @@ ${username}
             <textarea readOnly defaultValue={mailDraft} />
             <p>
               ✉️ Copy and send to{" "}
-              <strong style={{ color: "#60a5fa" }}>support@cryptofi.com</strong>{" "}
+              <strong style={{ color: "#60a5fa" }}>
+                crypto.cryptofi@gmail.com
+              </strong>{" "}
               or click send below.
             </p>
             <button onClick={handleSendMail}>📤 Send Email</button>
