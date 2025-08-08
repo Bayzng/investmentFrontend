@@ -677,11 +677,10 @@ select:focus {
 }
 
 
-
 .logout button {
   background: white;
   color: red;
-  margin-left: 4rem;
+  margin-left: 2rem;
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
