@@ -433,7 +433,7 @@ select:focus {
 
 .user-info-first {
   display: flex;
-  gap: 63rem;
+  /* gap: 63rem; */
   justify-content: space-between;
 }
 
@@ -676,9 +676,12 @@ select:focus {
   color: #ef4444;
 }
 
+
+
 .logout button {
   background: white;
   color: red;
+  margin-left: 4rem;
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
@@ -1059,18 +1062,25 @@ select:focus {
 
 .custom-dropdown {
   position: relative;
-  width: 220px;
+  max-width: 100%;
 }
+
 .custom-dropdown .selected {
   padding: 8px;
   cursor: pointer;
-  background: white;
   display: flex;
-  color: black;
-  width: 27rem;
   align-items: center;
+  background-color: white;
+  color: black;
   gap: 8px;
+  border-radius: 10px;
+  width: 100%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
+
 .custom-dropdown ul {
   position: absolute;
   list-style: none;
@@ -1080,8 +1090,10 @@ select:focus {
   margin: 0;
   width: 100%;
   border: 1px solid #ccc;
+  border-radius: 6px;
   z-index: 10;
 }
+
 .custom-dropdown li {
   padding: 8px;
   display: flex;
@@ -1093,6 +1105,7 @@ select:focus {
 .custom-dropdown li:hover {
   background: #f0f0f0;
 }
+
 .custom-dropdown img {
   width: 40px;
   height: 36px;
@@ -1101,12 +1114,13 @@ select:focus {
 @media (max-width: 768px) {
   .custom-dropdown .selected {
     padding: 8px;
-    cursor: pointer;
     display: flex;
-    width: 19rem;
     align-items: center;
     gap: 8px;
+    max-width: 100%; 
+    width: 100%;
   }
 }
+
 
 /* { name: "MetaMask", icon: <img src="/icons/metamask.svg" alt="MetaMask" /> } */

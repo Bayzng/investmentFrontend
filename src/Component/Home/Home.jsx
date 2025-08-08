@@ -304,7 +304,7 @@ const Home = () => {
                   className="home-close-btn"
                   onClick={() => setShowModal(false)}
                 >
-                  &times;
+                  X
                 </button>
                 <Register />
               </div>
@@ -379,7 +379,7 @@ const Home = () => {
               <p className="hki_ai_response">
                 Building a global crypto platform with a mission to make
                 blockchain technology accessible, trustworthy & rewarding for
-                all with our Supported Coins: BTC | ETH | USDT | CELO | + More
+                everyone with our Networks:| ARB | ETH | CELO | USDT | + More
                 <span className="blinker">_</span>
               </p>
             </div>

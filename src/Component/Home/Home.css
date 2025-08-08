@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
 
 :root {
   --hki-bg: #000;
@@ -18,7 +18,7 @@
 body {
   background-color: var(--hki-bg);
   color: var(--hki-text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   line-height: 1.6;
 }
@@ -171,7 +171,7 @@ body {
 }
 
 .hki_ai_response::after {
-  content: '_';
+  content: "_";
   animation: hki_blink 0.7s infinite;
 }
 
@@ -187,7 +187,11 @@ body {
 }
 
 #hki_demo_form button {
-  background-image: linear-gradient(to right, var(--hki-accent-1), var(--hki-accent-2));
+  background-image: linear-gradient(
+    to right,
+    var(--hki-accent-1),
+    var(--hki-accent-2)
+  );
   border: none;
   color: var(--hki-text-primary);
   width: 150px;
@@ -212,7 +216,11 @@ body {
 }
 
 .hki_cta_button {
-  background-image: linear-gradient(to right, var(--hki-accent-1), var(--hki-accent-2));
+  background-image: linear-gradient(
+    to right,
+    var(--hki-accent-1),
+    var(--hki-accent-2)
+  );
   color: var(--hki-text-primary);
   padding: 1rem 2rem;
   text-decoration: none;
@@ -295,67 +303,61 @@ body {
   }
 }
 
-
-.RoadMap  {
-    padding: 20px;
-    margin: 20px;
-    margin-top: 6rem;
-    font-size: 1.5rem;
-    border: none;
-    
+.RoadMap {
+  padding: 20px;
+  margin: 20px;
+  margin-top: 6rem;
+  font-size: 1.5rem;
+  border: none;
 }
 
 .RoadMap a {
-    text-decoration: none;
-    color: whitesmoke;
+  text-decoration: none;
+  color: whitesmoke;
 }
 
 .tradeee {
-    margin-bottom: 40rem;
+  margin-bottom: 40rem;
 }
-
-
-
 
 /* Modal.css */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  .modal-content {
-    background: black;
-    padding: 2rem;
-    border-radius: 10px;
-    position: relative;
-    width: 90%;
-    max-width: 500px;
-  }
-  
-  .home-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: white;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: black;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+}
+
+.home-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
 
 body {
   margin: 0;
   background: var(--dark-bg);
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   color: white;
   overflow-x: hidden;
   min-height: 100vh;
@@ -409,13 +411,18 @@ h1 {
 }
 
 .crypto-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--neon-purple));
+  background: linear-gradient(
+    45deg,
+    var(--neon-blue),
+    var(--neon-pink),
+    var(--neon-purple)
+  );
   z-index: -1;
   border-radius: 12px;
   opacity: 0;
@@ -524,14 +531,25 @@ h1 {
 }
 
 @keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20px, 20px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, 20px);
+  }
 }
 
 @keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 .pulse {
@@ -542,7 +560,6 @@ h1 {
   .hki_hero_subtitle {
     font-size: 1rem;
   }
-  
 
   .hki_hero_content {
     padding: 0.5rem;
