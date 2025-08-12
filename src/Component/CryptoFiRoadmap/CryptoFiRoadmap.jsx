@@ -28,7 +28,7 @@ const CryptoFiRoadmap = () => {
           <div className="cryptoFi-card">
             <img src="https://cdn-icons-png.flaticon.com/512/10415/10415331.png" alt="Deposit" />
             <h3>💼 Copy & Fund Wallet</h3>
-            <p>Copy your wallet address and fund it to receive <strong>20% interest</strong> instantly.</p>
+            <p>Copy your wallet address and fund it to receive <strong>20% trading interest</strong> instantly.</p>
           </div>
 
           <div className="cryptoFi-card">
