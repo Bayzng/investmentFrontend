@@ -37,7 +37,14 @@ const BlockchainExplorer = () => {
         <nav>
           <ul>
             <li>
-              <a>Explorer</a>
+              {/* White paper image with download */}
+              <a
+                href="/whitepaper.pdf"
+                download="CryptoFI_Whitepaper.pdf"
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                White Paper
+              </a>
             </li>
           </ul>
         </nav>
