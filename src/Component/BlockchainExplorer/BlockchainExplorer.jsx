@@ -40,7 +40,7 @@ const BlockchainExplorer = () => {
               <a
                 href="/whitepaper.pdf"
                 download="CryptoFI_Whitepaper.pdf"
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                style={{ display: "flex", alignItems: "center", gap: "8px", backgroundColor: "white", padding: "8px", color: "black", borderRadius: '5px' }}
               >
                 White Paper
               </a>

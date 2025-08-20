@@ -9,7 +9,7 @@ const CryptoAI = () => {
         <h1>🤖 CryptoFi AI</h1>
         <nav>
           <ul>
-            <li><a>AI Signals</a></li>
+            <li><a>Signals</a></li>
           </ul>
         </nav>
       </header>
@@ -25,7 +25,7 @@ const CryptoAI = () => {
         <ul>
           <li>⚡ Real-time AI Trading Signals</li>
           <li>💰 Earn Interest Daily on Your Crypto</li>
-          <li>🧠 Automated Smart Trading — no experience needed!</li>
+          <li>🧠 Automated Smart Trading, no experience needed!</li>
           <li>📊 Transparent analytics and performance tracking</li>
         </ul>
       </section>

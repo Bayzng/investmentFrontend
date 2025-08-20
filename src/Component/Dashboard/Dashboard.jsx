@@ -18,11 +18,11 @@ import arbitrum from "../../assets/arb.png";
 
 const wallets = [
   { name: "MetaMask", icon: <img src="https://freelogopng.com/images/all_img/1683021055metamask-icon.png" alt="MetaMask" /> },
-  { name: "Trust Wallet", icon: <img src="https://avatars.githubusercontent.com/u/32179889?s=280&v=4" alt="MetaMask" /> },
-  { name: "Coinbase Wallet", icon: <img src="https://cdn.iconscout.com/icon/free/png-256/free-coinbase-9420774-7651204.png" alt="MetaMask" /> },
-  { name: "WalletConnect", icon: <img src="https://images.seeklogo.com/logo-png/43/2/walletconnect-logo-png_seeklogo-430923.png" alt="MetaMask" /> },
-  { name: "SafePal", icon: <img src="https://play-lh.googleusercontent.com/uT6ByyNvUeLRMDnMKEC91RrbHftl2EBB58r9vZaNbiYf1F5Twa33_Hx0zYvEfCtiG1kE" alt="MetaMask" /> },
-  { name: "MathWallet", icon: <img src="https://play-lh.googleusercontent.com/7JhuwbTGFDaIdVj7LLyeOAvHyzxtx4zDOiQWuHOMP6T9ogijSzEBUhX3cK0q6LyMafQ" alt="MetaMask" /> },
+  { name: "Trust Wallet", icon: <img src="https://avatars.githubusercontent.com/u/32179889?s=280&v=4" alt="Trust Wallet" /> },
+  { name: "Coinbase Wallet", icon: <img src="https://cdn.iconscout.com/icon/free/png-256/free-coinbase-9420774-7651204.png" alt="Coinbase Wallet" /> },
+  { name: "WalletConnect", icon: <img src="https://images.seeklogo.com/logo-png/43/2/walletconnect-logo-png_seeklogo-430923.png" alt="WalletConnect" /> },
+  { name: "SafePal", icon: <img src="https://play-lh.googleusercontent.com/uT6ByyNvUeLRMDnMKEC91RrbHftl2EBB58r9vZaNbiYf1F5Twa33_Hx0zYvEfCtiG1kE" alt="SafePal" /> },
+  { name: "MathWallet", icon: <img src="https://play-lh.googleusercontent.com/7JhuwbTGFDaIdVj7LLyeOAvHyzxtx4zDOiQWuHOMP6T9ogijSzEBUhX3cK0q6LyMafQ" alt="MathWallet" /> },
 ];
 
 ChartJS.register(
@@ -62,7 +62,7 @@ const Dashboard = () => {
   };
 
   const resetModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(false); 
     setSelectedCoin(null);
     setSelectedNetwork("");
     setCopied(false);
