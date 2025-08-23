@@ -360,9 +360,7 @@
   }
 }
 
-
-/* === Pending Trade Modal === */
-.pendingTradeModal-overlay {
+.notificationModal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -370,53 +368,18 @@
   height: 100%;
   background: rgba(0,0,0,0.5);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-.pendingTradeModal-content {
-  background: #1f2937;
-  padding: 24px 32px;
-  border-radius: 12px;
-  text-align: center;
-  color: #f1f5f9;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  min-width: 280px;
-}
-
-.pendingTradeModal-content h2 {
-  margin-bottom: 12px;
-  font-size: 1.5rem;
-  color: #facc15;
-}
-
-.pendingTradeModal-content p {
-  margin: 6px 0;
-  font-size: 1rem;
-  color: #f1f5f9;
-}
-
-
-.pendingModal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 9999;
 }
 
-.pendingModal-content {
-  background: #1f2937;
-  padding: 30px;
+.notificationModal-content {
+  background: #1e293b;
+  padding: 20px 30px;
   border-radius: 12px;
   color: #f1f5f9;
+  max-width: 400px;
   text-align: center;
-  min-width: 300px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  font-size: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }

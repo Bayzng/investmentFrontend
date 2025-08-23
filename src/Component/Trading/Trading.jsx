@@ -20,6 +20,8 @@ export default function Trading() {
   const [percentChange, setPercentChange] = useState(5.3);
   const [showModal, setShowModal] = useState(false);
   const [showRequestModal, setShowRequestModal] = useState(false);
+  const [showTradeModal, setShowTradeModal] = useState(false);
+  const [tradeModalMessage, setTradeModalMessage] = useState("");
 
   const [tradeAmount, setTradeAmount] = useState(0);
   const [tradeDelay, setTradeDelay] = useState(5);
@@ -33,14 +35,17 @@ export default function Trading() {
       if (!token) return;
 
       try {
-        // const res = await axios.get("http://localhost:5000/api/auth/me", {
-        const res = await axios.get("https://investmentbackend-6m5g.onrender.com/api/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          "https://investmentbackend-6m5g.onrender.com/api/auth/me",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setUsername(res.data.name);
         setBalance(res.data.balance ?? 1000);
       } catch (error) {
-        console.error("Error fetching user data:", error.response?.data || error.message);
+        console.error(
+          "Error fetching user data:",
+          error.response?.data || error.message
+        );
       }
     };
     fetchUserData();
@@ -48,20 +53,20 @@ export default function Trading() {
 
   useEffect(() => {
     if (!username) return;
-  
+
     const fetchTrades = async () => {
       try {
-        // const res = await axios.get(`http://localhost:5000/api/trades/user/${username}`);
-        const res = await axios.get(`https://investmentbackend-6m5g.onrender.com/api/trades/user/${username}`);
+        const res = await axios.get(
+          `https://investmentbackend-6m5g.onrender.com/api/trades/user/${username}`
+        );
         setTransactions(res.data);
       } catch (err) {
         console.error("Error fetching trades:", err.response?.data || err.message);
       }
     };
-  
+
     fetchTrades();
   }, [username]);
-  
 
   // Price fluctuation simulator
   useEffect(() => {
@@ -95,7 +100,7 @@ export default function Trading() {
 
     const userTrades = transactions.filter((t) => t.status !== "cancelled").length;
     const maxTrades = balance >= 1000 ? 5 : 3;
-    if (userTrades >= maxTrades) return alert(`❌ Trade limit reached! Max ${maxTrades} trades.`);
+    if (userTrades >= maxTrades) return alert(`❌ Trade limit reached! Max ${maxTrades} trades Daily.`);
 
     const now = new Date();
     const scheduledAt = new Date(now.getTime() + tradeDelay * 1000);
@@ -113,17 +118,24 @@ export default function Trading() {
     // Optimistic UI update
     setTransactions((prev) => [tempTx, ...prev]);
     setBalance((b) => Number((b - amount).toFixed(2)));
+    setTradeAmount(0);
+
+    // Show Trade Modal
+    setTradeModalMessage("🚀 Trade is in progress... Tip: Keep calm and watch the market!");
+    setShowTradeModal(true);
 
     try {
-      // const res = await axios.post("http://localhost:5000/api/trades", {
-      const res = await axios.post("https://investmentbackend-6m5g.onrender.com/api/trades", {
-        username,
-        amount: tempTx.amount,
-        entryPrice: tempTx.entryPrice,
-        placedAt: tempTx.placedAt,
-        scheduledAt: tempTx.scheduledAt,
-        status: tempTx.status,
-      });
+      const res = await axios.post(
+        "https://investmentbackend-6m5g.onrender.com/api/trades",
+        {
+          username,
+          amount: tempTx.amount,
+          entryPrice: tempTx.entryPrice,
+          placedAt: tempTx.placedAt,
+          scheduledAt: tempTx.scheduledAt,
+          status: tempTx.status,
+        }
+      );
 
       const savedTx = res.data;
 
@@ -132,30 +144,37 @@ export default function Trading() {
         prev.map((t) => (t._id === tempTx._id ? savedTx : t))
       );
 
-      // Schedule execution
-      const timeout = setTimeout(() => executeTrade(savedTx._id), tradeDelay * 1000);
-      timersRef.current[savedTx._id] = timeout;
+      // Wait for tradeDelay seconds then execute trade and update modal
+      setTimeout(async () => {
+        await executeTrade(savedTx._id);
+        setTradeModalMessage(
+          "✅ Trade completed! Check your portfolio or transaction history below."
+        );
 
-      setTradeAmount(0);
+        // Hide modal after 3 seconds and refresh page
+        setTimeout(() => {
+          setShowTradeModal(false);
+          window.location.reload();
+        }, 3000);
+      }, tradeDelay * 1000);
     } catch (err) {
       console.error("❌ Error saving trade:", err.response?.data || err.message);
       setBalance((b) => Number((b + amount).toFixed(2)));
       setTransactions((prev) => prev.filter((t) => t._id !== tempTx._id));
+      setShowTradeModal(false);
     }
   };
 
   // --- Execute Trade ---
   const executeTrade = async (tradeId) => {
-    // Find the trade in local state
     const tx = transactions.find((t) => t._id === tradeId);
     if (!tx || tx.status !== "pending") return;
-  
-    // Simulate trade outcome
+
     const success = Math.random() < 0.6;
     let pnl = 0,
-        result = "failed",
-        note = "";
-  
+      result = "failed",
+      note = "";
+
     if (success) {
       const profitPct = (Math.random() * (10 - 0.5) + 0.5) / 100;
       pnl = parseFloat((tx.amount * profitPct).toFixed(2));
@@ -166,43 +185,38 @@ export default function Trading() {
       pnl = -parseFloat((tx.amount * lossPct).toFixed(2));
       note = `Loss ${(Math.abs(lossPct * 100)).toFixed(2)}%`;
     }
-  
+
     try {
-      // Update trade on backend
-      // const res = await axios.put(`http://localhost:5000/api/trades/${tradeId}`, {
-      const res = await axios.put(`https://investmentbackend-6m5g.onrender.com/api/trades/${tradeId}`, {
-        status: "executed",  // ✅ matches enum in backend
-        result,              // success / failed
-        pnl,
-        note,
-        executedAt: new Date().toISOString(),
-        balanceAfter: parseFloat((balance + pnl).toFixed(2)), // update user balance
-      });
-  
-      // Update local state
+      const res = await axios.put(
+        `https://investmentbackend-6m5g.onrender.com/api/trades/${tradeId}`,
+        {
+          status: "executed",
+          result,
+          pnl,
+          note,
+          executedAt: new Date().toISOString(),
+          balanceAfter: parseFloat((balance + pnl).toFixed(2)),
+        }
+      );
+
       setTransactions((prev) =>
         prev.map((t) => (t._id === tradeId ? res.data : t))
       );
-  
+
       setBalance((b) => parseFloat((b + pnl).toFixed(2)));
-  
     } catch (err) {
-      console.error(
-        "❌ Error updating trade:",
-        err.response?.data || err.message
-      );
+      console.error("❌ Error updating trade:", err.response?.data || err.message);
     }
-  
-    // Clean up any timer references if you use them
+
     delete timersRef.current[tradeId];
   };
-  
 
   // --- Cancel Pending Trade ---
   const cancelPending = async (id) => {
     try {
-      // const res = await axios.put(`http://localhost:5000/api/trades/cancel/${id}`);
-      const res = await axios.put(`https://investmentbackend-6m5g.onrender.com/api/trades/cancel/${id}`);
+      const res = await axios.put(
+        `https://investmentbackend-6m5g.onrender.com/api/trades/cancel/${id}`
+      );
       setTransactions((prev) =>
         prev.map((t) => (t._id === id ? res.data : t))
       );
@@ -211,7 +225,6 @@ export default function Trading() {
       console.error("Cancel trade error:", err.response?.data || err.message);
     }
   };
-  
 
   const clearHistory = () => {
     if (!confirm("Clear transaction history? This cannot be undone.")) return;
@@ -277,6 +290,7 @@ export default function Trading() {
       </header>
 
       <div className="top-grid">
+        {/* User Profile */}
         <div className="user-profile-card glass-card">
           <div className="avatar-wrapper">
             <img
@@ -291,6 +305,7 @@ export default function Trading() {
           </div>
         </div>
 
+        {/* Trading Asset */}
         <div className="trading-asset small-card">
           <h3>Total Assets</h3>
           <p className="big-number">
@@ -305,6 +320,7 @@ export default function Trading() {
           </div>
         </div>
 
+        {/* Trade Form */}
         <div className="trade-form-card small-card">
           <h3>Place Trade</h3>
           <label>Amount (USD)</label>
@@ -344,10 +360,12 @@ export default function Trading() {
         </div>
       </div>
 
+      {/* Chart */}
       <div className="chart-card card" style={{ height: 420 }}>
         <TradingViewWidget symbol="ETHUSDT" />
       </div>
 
+      {/* Transaction History */}
       <div className="history-card card">
         <div className="history-header">
           <h3>Transaction History</h3>
@@ -388,6 +406,7 @@ export default function Trading() {
         </div>
       </div>
 
+      {/* Existing Modals */}
       {showModal && (
         <div className="tradingModal-overlay" onClick={() => setShowModal(false)}>
           <div className="tradingModal-content" onClick={(e) => e.stopPropagation()}>
@@ -420,6 +439,15 @@ export default function Trading() {
             <button onClick={() => setShowRequestModal(false)} style={{ marginLeft: 10 }}>
               Close
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Trade Progress Modal */}
+      {showTradeModal && (
+        <div className="notificationModal-overlay">
+          <div className="notificationModal-content">
+            <h2>{tradeModalMessage}</h2>
           </div>
         </div>
       )}
