@@ -83,7 +83,8 @@ const Dashboard = () => {
       try {
         // const res = await axios.get("http://localhost:5000/api/auth/me", {
         const res = await axios.get(
-          "https://investmentbackend-6m5g.onrender.com/api/auth/me",
+          "http://localhost:5000/api/auth/me",
+          // "https://investmentbackend-6m5g.onrender.com/api/auth/me",
           {
             headers: {
               Authorization: `Bearer ${token}`,
