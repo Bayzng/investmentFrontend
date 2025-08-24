@@ -1,0 +1,195 @@
+/* src/components/TradingWidget/TradingWidget.css */
+.trading-pages {
+  background: #fff;
+}
+
+.tradingview-widget-container {
+  margin: 16px 0;
+}
+
+.columns.is-multiline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.column.is-4 {
+  flex: 1 1 280px;
+  min-width: 240px;
+}
+
+nav#nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.circle.btn.btn-default {
+  padding: 4px 10px;
+  height: 28px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+.hiddendivs {
+  display: none;
+}
+.hiddendivs.show {
+  display: block;
+}
+
+.block {
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+}
+.animation {
+  width: auto;
+  height: 100%;
+  font-size: 0;
+}
+.animation div {
+  display: inline-block;
+  width: auto;
+  padding: 0 10px;
+}
+
+.nft {
+  color: black;
+  font-size: 2rem;
+}
+/* NFT horizontal scrolling animation (plain CSS) */
+
+/* page/bg basics (optional) */
+html {
+  background: #0c0019;
+}
+
+/* block: visible area for the scroller */
+.block {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: transparent;
+  position: relative;
+  box-sizing: border-box;
+  padding: 8px 0;
+}
+
+/* animation: inner wide strip that moves left */
+.animation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* hide wrapping so cloned tail sits in same row */
+  white-space: nowrap;
+  animation: scroll-left linear infinite;
+  animation-duration: 40s; /* speed — increase = slower */
+  will-change: transform;
+}
+
+/* pause on hover to let users inspect images */
+.animation:hover {
+  animation-play-state: paused;
+}
+
+/* each image wrapper */
+.animation > div,
+.animation > img {
+  flex: 0 0 auto;
+}
+
+/* support for both direct <img> children and wrapped <div><img/></div> */
+.animation img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* hover zoom effect */
+.animation img:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.6);
+}
+
+/* make the first image slightly special/fade-in (optional) */
+.animation .first img {
+  transform-origin: center;
+  opacity: 0;
+  animation: firstFade 3s 0.6s ease forwards;
+}
+
+/* keyframe: continuous left scroll */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* assumes duplicated content, see JS/HTML note */
+}
+
+/* keyframe: first item fade/appear */
+@keyframes firstFade {
+  0%,
+  15% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* responsive tweaks */
+@media (max-width: 900px) {
+  .animation img {
+    height: 160px;
+    width: 160px;
+  }
+  .block {
+    padding: 6px 0;
+  }
+  .animation {
+    animation-duration: 30s;
+  }
+}
+@media (max-width: 480px) {
+  .animation img {
+    height: 120px;
+    width: 120px;
+  }
+  .animation {
+    animation-duration: 24s;
+    gap: 8px;
+  }
+}
+
+/* subtle glow/particles style (optional, simple approximation of your original) */
+.nft-glow {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(0, 0, 0, 0)
+  );
+  mix-blend-mode: screen;
+}
+
+/* utility: hide the duplicated tail for accessibility if you programmatically clone images */
+.animation[aria-hidden="true"] {
+  visibility: hidden;
+}

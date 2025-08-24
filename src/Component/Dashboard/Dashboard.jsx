@@ -15,14 +15,63 @@ import "./Dashboard.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import arbitrum from "../../assets/arb.png";
+import TradingWidget from "../TradingWidget/TradingWidget";
 
 const wallets = [
-  { name: "MetaMask", icon: <img src="https://freelogopng.com/images/all_img/1683021055metamask-icon.png" alt="MetaMask" /> },
-  { name: "Trust Wallet", icon: <img src="https://avatars.githubusercontent.com/u/32179889?s=280&v=4" alt="Trust Wallet" /> },
-  { name: "Coinbase Wallet", icon: <img src="https://cdn.iconscout.com/icon/free/png-256/free-coinbase-9420774-7651204.png" alt="Coinbase Wallet" /> },
-  { name: "WalletConnect", icon: <img src="https://images.seeklogo.com/logo-png/43/2/walletconnect-logo-png_seeklogo-430923.png" alt="WalletConnect" /> },
-  { name: "SafePal", icon: <img src="https://play-lh.googleusercontent.com/uT6ByyNvUeLRMDnMKEC91RrbHftl2EBB58r9vZaNbiYf1F5Twa33_Hx0zYvEfCtiG1kE" alt="SafePal" /> },
-  { name: "MathWallet", icon: <img src="https://play-lh.googleusercontent.com/7JhuwbTGFDaIdVj7LLyeOAvHyzxtx4zDOiQWuHOMP6T9ogijSzEBUhX3cK0q6LyMafQ" alt="MathWallet" /> },
+  {
+    name: "MetaMask",
+    icon: (
+      <img
+        src="https://freelogopng.com/images/all_img/1683021055metamask-icon.png"
+        alt="MetaMask"
+      />
+    ),
+  },
+  {
+    name: "Trust Wallet",
+    icon: (
+      <img
+        src="https://avatars.githubusercontent.com/u/32179889?s=280&v=4"
+        alt="Trust Wallet"
+      />
+    ),
+  },
+  {
+    name: "Coinbase Wallet",
+    icon: (
+      <img
+        src="https://cdn.iconscout.com/icon/free/png-256/free-coinbase-9420774-7651204.png"
+        alt="Coinbase Wallet"
+      />
+    ),
+  },
+  {
+    name: "WalletConnect",
+    icon: (
+      <img
+        src="https://images.seeklogo.com/logo-png/43/2/walletconnect-logo-png_seeklogo-430923.png"
+        alt="WalletConnect"
+      />
+    ),
+  },
+  {
+    name: "SafePal",
+    icon: (
+      <img
+        src="https://play-lh.googleusercontent.com/uT6ByyNvUeLRMDnMKEC91RrbHftl2EBB58r9vZaNbiYf1F5Twa33_Hx0zYvEfCtiG1kE"
+        alt="SafePal"
+      />
+    ),
+  },
+  {
+    name: "MathWallet",
+    icon: (
+      <img
+        src="https://play-lh.googleusercontent.com/7JhuwbTGFDaIdVj7LLyeOAvHyzxtx4zDOiQWuHOMP6T9ogijSzEBUhX3cK0q6LyMafQ"
+        alt="MathWallet"
+      />
+    ),
+  },
 ];
 
 ChartJS.register(
@@ -42,7 +91,7 @@ const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [balance, setBalance] = useState(0);
   const [showBalanceNotice, setShowBalanceNotice] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); 
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const [selectedWallet, setSelectedWallet] = useState(null);
 
@@ -62,7 +111,7 @@ const Dashboard = () => {
   };
 
   const resetModal = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
     setSelectedCoin(null);
     setSelectedNetwork("");
     setCopied(false);
@@ -281,7 +330,7 @@ const Dashboard = () => {
         if (balanceChartData[timePeriod]) {
           drawBalanceChart(balanceChartData[timePeriod]);
         }
-      }, 100); 
+      }, 100);
     });
 
     resizeObserver.observe(container);
@@ -619,6 +668,8 @@ const Dashboard = () => {
       </div>
       {/* </div> */}
 
+      <h2 className="CrytofiAds">CryptoFi Nft $ TradeView</h2>
+
       {showConnectNotice && (
         <div
           className="modal-overlay"
@@ -669,6 +720,21 @@ const Dashboard = () => {
       )}
 
       {/* ... Cards and Modal continue unchanged ... */}
+      <div>
+        <TradingWidget />
+      </div>
+
+      <div className="footers">
+        <footer id="hki_footer">
+          <div className="hki_credit_line">
+            <span>📣 Call to Action</span>
+            <div className="hki_footer_links">
+              <a>Trust</a> AND
+              <a>Reliable</a>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 };

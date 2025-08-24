@@ -43,7 +43,6 @@ body {
   box-sizing: border-box;
 }
 
-
 .dashboard-nav {
   list-style: none;
   display: flex;
@@ -290,7 +289,6 @@ body {
     flex-wrap: wrap;
     gap: 1rem;
   }
-
 
   nav {
     margin-top: 1rem;
@@ -597,7 +595,26 @@ select:focus {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  padding: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  /* padding: 2rem; */
+}
+
+.CrytofiAds {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00f7ff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 20px 0;
+  font-family: "Poppins", sans-serif;
+
+  /* Optional glow effect */
+  text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+}
+
+.footers {
+  margin-top: 2rem;
 }
 
 .glass-card {
@@ -682,13 +699,12 @@ select:focus {
 }
 
 .positive-change {
-  color: #22c55e; 
+  color: #22c55e;
 }
 
 .negative-change {
   color: #ef4444;
 }
-
 
 .logout button {
   background: white;
@@ -1118,15 +1134,13 @@ select:focus {
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 100%; 
+    max-width: 100%;
     width: 100%;
   }
 }
-
 
 .wallet-option img {
   width: 24px;
   height: 24px;
   object-fit: contain;
 }
-
