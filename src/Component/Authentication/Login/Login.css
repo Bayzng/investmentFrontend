@@ -32,6 +32,7 @@
     font-size: 16px;
     transition: all 0.3s ease;
   }
+
   
   .login-form input:focus {
     border-color: #667eea;
