@@ -116,15 +116,18 @@
 }
 
 .trade-form-card input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border: 1px solid #334155;
+  width:100%;
+  padding: 12px 16px;
+  margin-top:6px;
+  font-size: 16px;
+  border-radius:8px;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s ease;
   background: #0f172a;
   color: #f1f5f9;
-  font-size: 0.95rem;
+  border: 1px solid #334155;
+  margin-bottom: 12px;
 }
 
 .trade-form-card input:focus {
@@ -371,6 +374,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem; /* ensures space on very small screens */
 }
 
 .notificationModal-content {
@@ -378,10 +382,13 @@
   color: #fff;
   padding: 2rem;
   border-radius: 12px;
+  width: 100%;
   max-width: 400px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto; /* scroll if content overflows */
+  max-height: 90vh; /* keeps modal inside screen */
 }
 
 .notificationModal-content h2 {
@@ -406,6 +413,24 @@
   font-size: 0.95rem;
 }
 
+/* 🔹 Responsive styles for smaller screens */
+@media (max-width: 480px) {
+  .notificationModal-content {
+    padding: 1.2rem;
+    border-radius: 8px;
+    max-width: 95%; /* almost full width */
+  }
+
+  .notificationModal-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .notificationModal-content p,
+  .notificationModal-content ul li {
+    font-size: 0.9rem;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -416,7 +441,6 @@
     transform: scale(1);
   }
 }
-
 
 
 .WithdrawAssets button {
@@ -589,7 +613,6 @@
   .withdrawModal-content { padding:16px; width:92%; }
 }
 
-
 /* Overlay background */
 .successErrorModal-overlay {
   position: fixed;
@@ -602,6 +625,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 1rem; /* ensures spacing on small screens */
+  box-sizing: border-box;
 }
 
 /* Modal box */
@@ -616,9 +641,11 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   animation: popIn 0.35s ease;
   transition: transform 0.3s ease;
+  max-height: 90vh; /* keep it within viewport */
+  overflow-y: auto; /* scroll if needed */
 }
 
-/* Add success & error accent styles */
+/* Success & error accent */
 .successErrorModal.success {
   border-top: 6px solid #28a745;
 }
@@ -638,7 +665,6 @@
   font-size: 24px;
   margin-bottom: 12px;
   font-weight: 600;
-  /* color: #222; */
 }
 
 /* Message */
@@ -646,7 +672,6 @@
   font-size: 16px;
   margin-bottom: 25px;
   line-height: 1.6;
-  /* color: #555; */
 }
 
 /* Close button */
@@ -675,5 +700,35 @@
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* 🔹 Responsive styles */
+@media (max-width: 480px) {
+  .successErrorModal {
+    width: 95%;
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+
+  .modal-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .successErrorModal h2 {
+    font-size: 20px;
+  }
+
+  .successErrorModal p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .close-btn {
+    width: 100%; /* full width for easier tap */
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 6px;
   }
 }
