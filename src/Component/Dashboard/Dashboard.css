@@ -603,14 +603,14 @@ select:focus {
 .CrytofiAds {
   font-size: 2rem;
   font-weight: bold;
-  color: #00f7ff;
+  color: white;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 20px 0;
   font-family: "Poppins", sans-serif;
 
   /* Optional glow effect */
-  text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+  text-shadow: 0 0 1px #00f7ff, 0 0 5px #00f7ff, 0 0 5px #00f7ff;
 }
 
 .footers {

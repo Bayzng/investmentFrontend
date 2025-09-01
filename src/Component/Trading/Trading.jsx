@@ -1,5 +1,5 @@
 // Trading.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Trading.css";
@@ -21,10 +21,14 @@ export default function Trading() {
   const [balance, setBalance] = useState(0);
   const [isPositive, setIsPositive] = useState(true);
   const [percentChange, setPercentChange] = useState(5.3);
+
   const [showModal, setShowModal] = useState(false);
   const [showRequestModal, setShowRequestModal] = useState(false);
-  const [showTradeModal, setShowTradeModal] = useState(false);
-  const [tradeModalMessage, setTradeModalMessage] = useState("");
+
+  // ONLY show result modal on executed success/fail
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [resultMessage, setResultMessage] = useState("");
+  const [resultType, setResultType] = useState(""); // 'success' | 'failed' | ''
 
   // Withdraw modal + wallet/amount state
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -36,7 +40,25 @@ export default function Trading() {
   const [tradeAmount, setTradeAmount] = useState(0);
   const [tradeDelay, setTradeDelay] = useState(5);
   const [transactions, setTransactions] = useState([]);
-  // const timersRef = useRef({}); // kept for parity with sample (not used)
+
+  // NEW: Trade in progress modal
+  const [showProgressModal, setShowProgressModal] = useState(false);
+
+  // Refs to ensure we notify exactly once per executed trade
+  // hydrate from localStorage so notifications survive refresh
+  const notifiedIdsRef = useRef(
+    new Set(JSON.parse(localStorage.getItem("notifiedTradeIds") || "[]"))
+  );
+  const prevTxRef = useRef([]);
+  // firstLoadRef prevents showing modals for already-executed trades when the page first loads
+  const firstLoadRef = useRef(true);
+
+  const handleCloseResultModal = () => {
+    setShowResultModal(false);
+    setResultMessage("");
+    setResultType("");
+    // we DO NOT remove the notified id here — it's already stored when the modal was shown.
+  };
 
   // Helpers
   const getToken = () => localStorage.getItem("token");
@@ -59,13 +81,78 @@ export default function Trading() {
     }
   };
 
+  const persistNotifiedIds = () => {
+    localStorage.setItem(
+      "notifiedTradeIds",
+      JSON.stringify([...notifiedIdsRef.current])
+    );
+  };
+
   const fetchTrades = async (u) => {
     if (!u) return;
     try {
       const res = await axios.get(`${API_BASE}/api/trades/user/${u}`);
-      setTransactions(Array.isArray(res.data) ? res.data : []);
+      const trades = Array.isArray(res.data) ? res.data : [];
+
+      // If this is the first load, set the prev snapshot and DON'T notify for already-executed trades.
+      if (firstLoadRef.current) {
+        setTransactions(trades);
+        prevTxRef.current = trades;
+        firstLoadRef.current = false;
+        return;
+      }
+
+      // Build map of previous statuses by id to detect status transitions
+      const prevById = Object.fromEntries(
+        (prevTxRef.current || []).map((t) => [t._id, t])
+      );
+
+      // Find trades that just transitioned to "executed" and haven't been notified yet
+      const newlyExecuted = trades.filter((t) => {
+        const was = prevById[t._id];
+        const justExecuted =
+          t.status === "executed" && (!was || was.status !== "executed");
+        const notNotified = !notifiedIdsRef.current.has(t._id);
+        return justExecuted && notNotified;
+      });
+
+      if (newlyExecuted.length > 0) {
+        // Pick the most recent executed trade (by executedAt, fallback to placedAt)
+        const pickLatest = (arr) =>
+          [...arr].sort((a, b) => {
+            const ta =
+              new Date(a.executedAt || a.updatedAt || a.placedAt).getTime() ||
+              0;
+            const tb =
+              new Date(b.executedAt || b.updatedAt || b.placedAt).getTime() ||
+              0;
+            return tb - ta;
+          })[0];
+
+        const latest = pickLatest(newlyExecuted);
+        // keep the detailed message (so users see pnl)
+        const msg =
+          latest.result === "success"
+            ? `✅ Trade Success! You earned ${formatMoney(latest.pnl)}`
+            : `❌ Trade Failed! You lost ${formatMoney(Math.abs(latest.pnl))}`;
+
+        // set both the message and the result type
+        setResultMessage(msg);
+        setResultType(latest.result === "success" ? "success" : "failed");
+        setShowResultModal(true);
+
+        // mark notified so we don't show again — persist to localStorage
+        notifiedIdsRef.current.add(latest._id);
+        persistNotifiedIds();
+      }
+
+      setTransactions(trades);
+      prevTxRef.current = trades;
     } catch (err) {
-      console.error("Error fetching trades:", err.response?.data || err.message);
+      console.error(
+        "Error fetching trades:",
+        err.response?.data || err.message
+      );
     }
   };
 
@@ -77,6 +164,7 @@ export default function Trading() {
   // --- Fetch user's trades when username available + poll every 5s ---
   useEffect(() => {
     if (!username) return;
+    // initial fetch (firstLoadRef ensures we don't notify for existing executed trades)
     fetchTrades(username);
 
     const interval = setInterval(async () => {
@@ -116,7 +204,9 @@ export default function Trading() {
   const todaysTradesCount = () => {
     const today = new Date().toDateString();
     return transactions.filter(
-      (t) => t.status !== "cancelled" && new Date(t.placedAt).toDateString() === today
+      (t) =>
+        t.status !== "cancelled" &&
+        new Date(t.placedAt).toDateString() === today
     ).length;
   };
 
@@ -155,10 +245,11 @@ export default function Trading() {
     setBalance((b) => Number((b - amount).toFixed(2)));
     setTradeAmount(0);
 
-    // Show Trade Modal
-    setTradeModalMessage("🚀 Trade scheduled. It will execute automatically.");
-    setShowTradeModal(true);
+    // Show "Trade in Progress..." modal for ~2s
+    setShowProgressModal(true);
+    setTimeout(() => setShowProgressModal(false), 2000);
 
+    // Send to backend
     try {
       const res = await axios.post(`${API_BASE}/api/trades`, {
         username,
@@ -171,7 +262,9 @@ export default function Trading() {
 
       // Support both shapes: { trade, balance } OR just trade
       const savedTx = res?.data?.trade || res?.data || {};
-      setTransactions((prev) => prev.map((t) => (t._id === tempTx._id ? savedTx : t)));
+      setTransactions((prev) =>
+        prev.map((t) => (t._id === tempTx._id ? savedTx : t))
+      );
 
       if (typeof res?.data?.balance === "number") {
         setBalance(res.data.balance);
@@ -181,15 +274,14 @@ export default function Trading() {
         // Fallback: refetch user to ensure balance is accurate
         await refreshUser();
       }
-
-      // Hide modal after a moment
-      setTimeout(() => setShowTradeModal(false), 2500);
     } catch (err) {
-      console.error("❌ Error saving trade:", err.response?.data || err.message);
+      console.error(
+        "❌ Error saving trade:",
+        err.response?.data || err.message
+      );
       // rollback optimistic update
       setBalance((b) => Number((b + amount).toFixed(2)));
       setTransactions((prev) => prev.filter((t) => t._id !== tempTx._id));
-      setShowTradeModal(false);
     }
   };
 
@@ -199,7 +291,9 @@ export default function Trading() {
       const res = await axios.put(`${API_BASE}/api/trades/cancel/${id}`);
       // backend returns the updated trade; balance is updated server-side
       const updatedTrade = res.data;
-      setTransactions((prev) => prev.map((t) => (t._id === id ? updatedTrade : t)));
+      setTransactions((prev) =>
+        prev.map((t) => (t._id === id ? updatedTrade : t))
+      );
       await refreshUser(); // ensure balance reflects refunded stake
     } catch (err) {
       console.error("Cancel trade error:", err.response?.data || err.message);
@@ -209,6 +303,11 @@ export default function Trading() {
   const clearHistory = () => {
     if (!confirm("Clear transaction history? This cannot be undone.")) return;
     setTransactions([]);
+    // NOTE: we intentionally do NOT clear notifiedTradeIds here so already-notified
+    // executed trades won't re-notify on the next fetch. If you want clearing history
+    // to also reset notifications, add:
+    // notifiedIdsRef.current.clear();
+    // persistNotifiedIds();
   };
 
   const handleSendMail = async () => {
@@ -283,7 +382,10 @@ export default function Trading() {
         alert("❌ Failed to send withdrawal request. Try again later.");
       }
     } catch (err) {
-      console.error("Withdrawal mail error:", err.response?.data || err.message || err);
+      console.error(
+        "Withdrawal mail error:",
+        err.response?.data || err.message || err
+      );
       alert("⚠️ Could not send withdrawal request. Check your connection.");
     }
   };
@@ -296,8 +398,12 @@ export default function Trading() {
       <td>{formatMoney(tx.entryPrice)}</td>
       <td>{tx.status}</td>
       <td>{tx.executedAt ? new Date(tx.executedAt).toLocaleString() : "-"}</td>
-      <td style={{ color: tx.result === "failed" ? "red" : "green" }}>{tx.result || "-"}</td>
-      <td>{typeof tx.pnl === "number" && tx.pnl !== 0 ? formatMoney(tx.pnl) : "-"}</td>
+      <td style={{ color: tx.result === "failed" ? "red" : "green" }}>
+        {tx.result || "-"}
+      </td>
+      <td>
+        {typeof tx.pnl === "number" && tx.pnl !== 0 ? formatMoney(tx.pnl) : "-"}
+      </td>
       <td>{tx.note}</td>
       <td>
         {tx.status === "pending" && (
@@ -348,11 +454,14 @@ export default function Trading() {
             <h4>Last Traded Price</h4>
             <p className="big-number">{formatMoney(price)}</p>
             <p className={isPositive ? "positive-change" : "negative-change"}>
-              {isPositive ? "+" : "-"}${change.toLocaleString()} ({percentChange}%)
+              {isPositive ? "+" : "-"}${change.toLocaleString()} (
+              {percentChange}%)
             </p>
           </div>
           <div className="WithdrawAssets">
-            <button onClick={() => setShowWithdrawModal(true)}>Withdraw Assets</button>
+            <button onClick={() => setShowWithdrawModal(true)}>
+              Withdraw Assets
+            </button>
           </div>
         </div>
 
@@ -405,19 +514,21 @@ export default function Trading() {
           <p style={{ marginTop: 10, fontSize: 13, color: "#666" }}>
             {todaysCount >= maxTrades ? (
               <strong style={{ color: "#c44" }}>
-                Daily limit reached ({maxTrades}/{maxTrades}). Come back tomorrow.
+                Daily limit reached ({maxTrades}/{maxTrades}). Come back
+                tomorrow.
               </strong>
             ) : (
               <>
-                You have <strong>{tradesLeft}</strong> of <strong>{maxTrades}</strong> trades left
-                today.
+                You have <strong>{tradesLeft}</strong> of{" "}
+                <strong>{maxTrades}</strong> trades left today.
               </>
             )}
           </p>
 
           <p style={{ marginTop: 10, fontSize: 12, color: "#666" }}>
-            Trades are simulated by the server. When executed, trades will randomly succeed or fail
-            and update your balance and transaction history automatically.
+            Trades are simulated by the server. When executed, trades will
+            randomly succeed or fail and update your balance and transaction
+            history automatically.
           </p>
         </div>
       </div>
@@ -461,7 +572,9 @@ export default function Trading() {
                   </td>
                 </tr>
               ) : (
-                transactions.map((tx) => <TransactionRow key={tx._id} tx={tx} />)
+                transactions.map((tx) => (
+                  <TransactionRow key={tx._id} tx={tx} />
+                ))
               )}
             </tbody>
           </table>
@@ -470,19 +583,32 @@ export default function Trading() {
 
       {/* Welcome Modal */}
       {showModal && (
-        <div className="tradingModal-overlay" onClick={() => setShowModal(false)}>
-          <div className="tradingModal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="tradingModal-overlay"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="tradingModal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2>👋 Welcome to CryptoFi Trading</h2>
             <p>🚀 Ready to level up your crypto journey?</p>
             <p>
-              📈 CryptoFi offers <strong>higher returns</strong> through smart trading.
+              📈 CryptoFi offers <strong>higher returns</strong> through smart
+              trading.
             </p>
-            <p>💰 If your wallet isn’t funded yet, go back to the dashboard and deposit some crypto!</p>
             <p>
-              ✨ Request a <strong>trading tutor</strong> or find a <strong>trading partner</strong> to
-              start.
+              💰 If your wallet isn’t funded yet, go back to the dashboard and
+              deposit some crypto!
             </p>
-            <button className="request-btn" onClick={() => setShowRequestModal(true)}>
+            <p>
+              ✨ Request a <strong>trading tutor</strong> or find a{" "}
+              <strong>trading partner</strong> to start.
+            </p>
+            <button
+              className="request-btn"
+              onClick={() => setShowRequestModal(true)}
+            >
               📩 Request Tutor/Partner
             </button>
           </div>
@@ -491,8 +617,14 @@ export default function Trading() {
 
       {/* Request Modal */}
       {showRequestModal && (
-        <div className="tradingModal-overlay" onClick={() => setShowRequestModal(false)}>
-          <div className="tradingModal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="tradingModal-overlay"
+          onClick={() => setShowRequestModal(false)}
+        >
+          <div
+            className="tradingModal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h3>📧 Your Email Draft</h3>
             <textarea
               readOnly
@@ -502,10 +634,16 @@ export default function Trading() {
             />
             <p>
               ✉️ Copy and send to{" "}
-              <strong style={{ color: "#60a5fa" }}>crypto.cryptofi@gmail.com</strong> or click send below.
+              <strong style={{ color: "#60a5fa" }}>
+                crypto.cryptofi@gmail.com
+              </strong>{" "}
+              or click send below.
             </p>
             <button onClick={handleSendMail}>📤 Send Email</button>
-            <button onClick={() => setShowRequestModal(false)} style={{ marginLeft: 10 }}>
+            <button
+              onClick={() => setShowRequestModal(false)}
+              style={{ marginLeft: 10 }}
+            >
               Close
             </button>
           </div>
@@ -514,13 +652,20 @@ export default function Trading() {
 
       {/* Withdraw Modal */}
       {showWithdrawModal && (
-        <div className="withdrawModal-overlay" onClick={() => setShowWithdrawModal(false)}>
-          <div className="withdrawModal-content" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="withdrawModal-overlay"
+          onClick={() => setShowWithdrawModal(false)}
+        >
+          <div
+            className="withdrawModal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="withdraw-top">
               <h2>💸 Withdraw Assets</h2>
               <p className="withdraw-sub">
-                Please provide your <strong>Celo USDT</strong> wallet address and the amount to withdraw.
-                Withdrawals are processed only via <strong>Celo USDT</strong>.
+                Please provide your <strong>Celo USDT</strong> wallet address
+                and the amount to withdraw. Withdrawals are processed only via{" "}
+                <strong>Celo USDT</strong>.
               </p>
             </div>
 
@@ -548,8 +693,9 @@ export default function Trading() {
             {withdrawError && <p className="withdraw-error">{withdrawError}</p>}
 
             <p className="withdraw-note">
-              <strong>Note:</strong> Ensure this is a CELO USDT-compatible address. Incorrect addresses may lead to
-              irreversible loss. Available balance: <address>{formatMoney(balance)}</address>
+              <strong>Note:</strong> Ensure this is a CELO USDT-compatible
+              address. Incorrect addresses may lead to irreversible loss.
+              Available balance: <address>{formatMoney(balance)}</address>
             </p>
 
             <div className="withdraw-actions">
@@ -557,7 +703,10 @@ export default function Trading() {
                 className="btn"
                 onClick={handleWithdrawSubmit}
                 disabled={
-                  !walletAddress || !withdrawAmount || !!withdrawError || Number(withdrawAmount) <= 0
+                  !walletAddress ||
+                  !withdrawAmount ||
+                  !!withdrawError ||
+                  Number(withdrawAmount) <= 0
                 }
               >
                 Submit Withdrawal
@@ -578,11 +727,61 @@ export default function Trading() {
         </div>
       )}
 
-      {/* Trade Progress Modal */}
-      {showTradeModal && (
+      {/* Progress Modal (NEW) */}
+      {showProgressModal && (
         <div className="notificationModal-overlay">
           <div className="notificationModal-content">
-            <h2>{tradeModalMessage}</h2>
+            <h2>⏳ Trade in Progress...</h2>
+            <p>
+              Your trade is being processed. Please wait a moment — don't
+              refresh or close the page.
+            </p>
+            <ul>
+              <li>✅ Please wait a few seconds</li>
+              <li>⚡ Do not refresh or close this page</li>
+              <li>📊 Market prices may change during execution</li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Result Modal (only for executed success/fail) */}
+      {showResultModal && (
+        <div
+          className="successErrorModal-overlay"
+          onClick={handleCloseResultModal}
+        >
+          <div
+            className={`successErrorModal ${
+              resultType === "success" ? "success" : "failed"
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>{resultMessage}</h2>
+
+            <p>
+              {resultType === "success" ? (
+                <>
+                  ✅ Your trade completed successfully. The PnL shown above has
+                  been applied to your balance.
+                  <br />
+                  💰 You can view the updated balance on the dashboard.
+                </>
+              ) : (
+                <>
+                  ❌ Your trade failed. No funds were lost beyond the stake
+                  shown, and you can review the trade details in history.
+                  <br />
+                  📊 Consider reviewing your strategy or trying again.
+                </>
+              )}
+            </p>
+
+            <div style={{ marginTop: 12 }}>
+              <button className="close-btn" onClick={handleCloseResultModal}>
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
