@@ -432,7 +432,8 @@ const Dashboard = () => {
                         🔐 Connected via{" "}
                         <span style={{ color: "#4ade80" }}>
                           {selectedWallet}
-                        </span>
+                        </span> <br/>
+                        <p style={{ marginTop: "5px" }}>Click Below 👇</p>
                       </p>
                     )}
 
@@ -471,7 +472,7 @@ const Dashboard = () => {
                                 }}
                               >
                                 <img src={arbitrum} alt="Arbitrum" /> Arbitrum
-                                One
+                                One ( USDT )
                               </li>
                             </ul>
                           )}
@@ -688,7 +689,7 @@ const Dashboard = () => {
               style={{ marginTop: "20px" }}
               onClick={() => setShowConnectNotice(false)}
             >
-              Okay
+              Connect
             </button>
           </div>
         </div>
