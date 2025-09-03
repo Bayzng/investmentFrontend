@@ -65,9 +65,6 @@ nav#nav {
 /* NFT horizontal scrolling animation (plain CSS) */
 
 /* page/bg basics (optional) */
-html {
-  background: #0c0019;
-}
 
 /* block: visible area for the scroller */
 .block {

@@ -629,6 +629,8 @@ const Dashboard = () => {
         </div>
       )}
 
+      <h2 className="AdvertOne">Market (CAP)</h2>
+
       <div className="dashboard-cards">
         <div className="glass-card">
           <h3 className="card-title">Sales Statistic</h3>
@@ -669,7 +671,7 @@ const Dashboard = () => {
       </div>
       {/* </div> */}
 
-      <h2 className="CrytofiAds">CryptoFi Nft $ TradeView</h2>
+      <h2 className="AdvertTwo">CryptoFi Nft $ TradeView</h2>
 
       {showConnectNotice && (
         <div

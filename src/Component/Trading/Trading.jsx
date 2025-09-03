@@ -526,9 +526,9 @@ export default function Trading() {
           </p>
 
           <p style={{ marginTop: 10, fontSize: 12, color: "#666" }}>
-            Trades are simulated by the server. When executed, trades will
-            randomly succeed or fail and update your balance and transaction
-            history automatically.
+            Trades are executed in real time based on live market conditions. 
+            When you place a trade, your profit or loss 
+            is determined by actual price movements.
           </p>
         </div>
       </div>
