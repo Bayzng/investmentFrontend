@@ -62,7 +62,7 @@ body {
   border-radius: 10px;
   text-decoration: none;
   border: none;
-  color: var(--hki-text-primary);
+  /* color: var(--hki-text-primary); */
   font-size: 1.3rem;
   cursor: pointer;
 }

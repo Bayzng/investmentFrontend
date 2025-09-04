@@ -293,11 +293,18 @@ const Home = () => {
           </Link>
         </nav>
         <button id="hki_mobile_nav_toggle">
-        <Link to="/auth">
-          Get Started
+          <Link
+            style={{
+              backgroundColor: "transparent",
+              textDecoration: "none",
+              color: "#fff",
+              borderRadius: "8px",
+            }}
+            to="/auth"
+          >
+            Get Started
           </Link>
         </button>
-        
       </header>
 
       <main id="hki_main_content">

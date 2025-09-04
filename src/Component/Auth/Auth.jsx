@@ -105,7 +105,7 @@ const Auth = () => {
               <input
                 type="text"
                 name="name"
-                placeholder="Full Name"
+                placeholder="Username"
                 onChange={handleChange}
                 required
               />
@@ -141,8 +141,8 @@ const Auth = () => {
       <div className="auth-panels-container">
         <div className="auth-panel auth-left-panel">
           <div className="auth-content">
-            <h3>New here ?</h3>
-            <p>Create an account and start your journey with us</p>
+            <h3>Zero Wallet ?</h3>
+            <p>Sign up and start your crypto journey</p>
             <button
               type="button"
               className="auth-btn auth-transparent"
@@ -159,8 +159,8 @@ const Auth = () => {
         </div>
         <div className="auth-panel auth-right-panel">
           <div className="auth-content">
-            <h3>One of us ?</h3>
-            <p>Already have an account? Sign in to continue.</p>
+            <h3>Already on-chain ?</h3>
+            <p>Got a wallet? Sign in to continue</p>
             <button
               type="button"
               className="auth-btn auth-transparent"
