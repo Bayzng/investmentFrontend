@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Home.css";
 import Hero from "../Hero/Hero";
-import Register from "../Authentication/Register/Register";
+// import Register from "../Authentication/Register/Register";
 import TradingDashboard from "../TradingDashboard/TradingDashboard";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const canvasRef = useRef(null);
   const titleRef = useRef(null);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const cryptoData = [
     {
@@ -278,42 +278,26 @@ const Home = () => {
     <div id="hki_page_wrapper">
       <header id="hki_header">
         <div className="hki_logo">CryptoFI</div>
-          <nav className="hki_nav">
-            <Link to="/blockchainExplorer">
-              <a href="#">Contract</a>
-            </Link>
-            <Link to="/cryptoAI">
-              {" "}
-              <a href="#">AI</a>
-            </Link>
-            <a
-              href="#"
-              className="hki_cta_button"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowModal(true);
-              }}
-            >
+        <nav className="hki_nav">
+          <Link to="/blockchainExplorer">
+            <a href="#">Contract</a>
+          </Link>
+          <Link to="/cryptoAI">
+            {" "}
+            <a href="#">AI</a>
+          </Link>
+          <Link to="/auth">
+            <a href="#" className="hki_cta_button">
               Get Started
             </a>
-          </nav>
-          {showModal && (
-            <div className="modal-overlay">
-              <div className="modal-content">
-                <button
-                  className="home-close-btn"
-                  onClick={() => setShowModal(false)}
-                >
-                  X
-                </button>
-                <Register />
-              </div>
-            </div>
-          )}
-
-        <button id="hki_mobile_nav_toggle" onClick={() => setShowModal(true)}>
+          </Link>
+        </nav>
+        <button id="hki_mobile_nav_toggle">
+        <Link to="/auth">
           Get Started
+          </Link>
         </button>
+        
       </header>
 
       <main id="hki_main_content">
@@ -362,9 +346,9 @@ const Home = () => {
             <div className="hki_feature_card hki_animate_on_scroll hki_large_card">
               <h3>Earn with Us 💲</h3>
               <p>
-                By integrating our AI's you will be able to Stake and
-                earn rewards on your crypto holdings, as we have the most
-                powerful and advance Artificial Intelligence features.
+                By integrating our AI's you will be able to Stake and earn
+                rewards on your crypto holdings, as we have the most powerful
+                and advance Artificial Intelligence features.
               </p>
             </div>
           </div>
@@ -414,7 +398,11 @@ const Home = () => {
               return (
                 <div className="crypto-card" key={crypto.id}>
                   <div className="crypto-header">
-                    <img src={crypto.image} alt={crypto.name} className="crypto-logo" />
+                    <img
+                      src={crypto.image}
+                      alt={crypto.name}
+                      className="crypto-logo"
+                    />
                     <h3 className="crypto-name">
                       {crypto.name}{" "}
                       <span className="crypto-symbol">
@@ -475,15 +463,8 @@ const Home = () => {
         <div className="hki_credit_line">
           <span>📣 Call to Action</span>
           <div className="hki_footer_links">
-            <a
-            >
-              Trust
-            </a>{" "}
-            AND
-            <a
-            >
-              Reliable
-            </a>
+            <a>Trust</a> AND
+            <a>Reliable</a>
           </div>
         </div>
       </footer>
