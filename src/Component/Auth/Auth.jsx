@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import registerImage from "../../assets/register.png"
+import LoginImage from "../../assets/login.png"
 import { useNavigate } from "react-router-dom";
+
 import "./Auth.css";
 
 const Auth = () => {
@@ -72,7 +78,7 @@ const Auth = () => {
             <h2 className="auth-title">Sign in</h2>
             {successMsg && !isSignUpMode && <p className="success-message">{successMsg}</p>}
             <div className="auth-input-field">
-              <i className="fas fa-envelope"></i>
+              <i className="fas fa-envelope"><MdEmail /></i>
               <input
                 type="email"
                 name="email"
@@ -82,7 +88,7 @@ const Auth = () => {
               />
             </div>
             <div className="auth-input-field">
-              <i className="fas fa-lock"></i>
+              <i className="fas fa-lock"><FaLock /></i>
               <input
                 type="password"
                 name="password"
@@ -101,7 +107,7 @@ const Auth = () => {
             <h2 className="auth-title">Sign up</h2>
             {successMsg && isSignUpMode && <p className="success-message">{successMsg}</p>}
             <div className="auth-input-field">
-              <i className="fas fa-user"></i>
+              <i className="fas fa-user"><FaUser /></i>
               <input
                 type="text"
                 name="name"
@@ -111,7 +117,7 @@ const Auth = () => {
               />
             </div>
             <div className="auth-input-field">
-              <i className="fas fa-envelope"></i>
+              <i className="fas fa-envelope"><MdEmail /></i>
               <input
                 type="email"
                 name="email"
@@ -121,7 +127,7 @@ const Auth = () => {
               />
             </div>
             <div className="auth-input-field">
-              <i className="fas fa-lock"></i>
+              <i className="fas fa-lock"><FaLock /></i>
               <input
                 type="password"
                 name="password"
@@ -152,7 +158,7 @@ const Auth = () => {
             </button>
           </div>
           <img
-            src="https://i.ibb.co/6HXL6q1/Privacy-policy-rafiki.png"
+            src={LoginImage}
             className="auth-image"
             alt="Privacy policy illustration"
           />
@@ -170,7 +176,7 @@ const Auth = () => {
             </button>
           </div>
           <img
-            src="https://i.ibb.co/nP8H853/Mobile-login-rafiki.png"
+            src={registerImage}
             className="auth-image"
             alt="Mobile login illustration"
           />

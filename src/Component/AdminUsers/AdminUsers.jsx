@@ -48,7 +48,7 @@ const AdminUsers = () => {
         }
       );
 
-      alert("Balance updated successfully");
+      alert("Usdt sent successfully");
       fetchUsers(); 
     } catch (err) {
       console.error("Error adding balance:", err);
@@ -58,7 +58,7 @@ const AdminUsers = () => {
 
   return (
     <div className="admin-container">
-      <h2>Admin Panel</h2>
+      <h2>CryptoFi Log</h2>
       <p>All Registered Users</p>
       {users.length === 0 ? (
         <p>No users found</p>
@@ -75,7 +75,7 @@ const AdminUsers = () => {
               <div className="balance-action">
                 <input
                   type="number"
-                  placeholder="Amount"
+                  placeholder="Usdt Amount"
                   value={amounts[user._id] || ""}
                   onChange={(e) => handleAmountChange(e, user._id)}
                 />
