@@ -156,7 +156,6 @@ export default function Trading() {
     }
   };
 
-  // --- Fetch user data on mount ---
   useEffect(() => {
     refreshUser();
   }, []);
